@@ -22,7 +22,7 @@ public class MessageAdapter extends PagedListAdapter<Message, MessageAdapter.Mes
     @NonNull
     @Override
     public MessageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(viewType, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_holder_message, parent, false);
         return new MessageViewHolder(view);
     }
 
@@ -33,7 +33,7 @@ public class MessageAdapter extends PagedListAdapter<Message, MessageAdapter.Mes
         if (message == null) {
             holder.text.setText("null");
         } else {
-            holder.text.setText(String.valueOf(message.get().getCreatedAt()));
+            holder.text.setText(message.getId());
         }
     }
 

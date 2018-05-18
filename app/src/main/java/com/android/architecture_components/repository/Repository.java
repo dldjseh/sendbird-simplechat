@@ -4,9 +4,9 @@ import android.arch.lifecycle.LiveData;
 import android.arch.paging.PagedList;
 
 import com.android.architecture_components.internal.dao.Dao;
-import com.android.architecture_components.internal.entity.Message;
+import com.android.architecture_components.internal.entity.SendBirdObject;
 
-public abstract class Repository<DAO extends Dao> {
+public abstract class Repository<DAO extends Dao, OBJ extends SendBirdObject> {
 
     protected DAO dao;
 
@@ -14,5 +14,7 @@ public abstract class Repository<DAO extends Dao> {
         this.dao = dao;
     }
 
-    abstract LiveData<PagedList<Message>> getAll();
+    abstract public LiveData<PagedList<OBJ>> getAll();
+
+    abstract public void save(OBJ obj);
 }

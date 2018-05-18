@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.EditText;
 
 import com.android.architecture_components.R;
 import com.android.architecture_components.internal.ChatDatabase;
@@ -18,8 +19,11 @@ import com.android.architecture_components.ui.adapter.MessageItemCallback;
 import com.android.architecture_components.viewmodel.MessageViewModel;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class MessageActivity extends BaseActivity implements MessageView {
+
+    private MessageRepository messageRepository;
 
     private MessagePresenter messagePresenter;
 
@@ -27,6 +31,8 @@ public class MessageActivity extends BaseActivity implements MessageView {
 
     @BindView(R.id.activity_message_recycler_view)
     RecyclerView recyclerView;
+    @BindView(R.id.activity_message_edit_text)
+    EditText editText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +40,7 @@ public class MessageActivity extends BaseActivity implements MessageView {
         setContentView(R.layout.activity_message);
 
         MessageDao messageDao = ChatDatabase.getInstance(this).getMessageDao();
-        MessageRepository messageRepository = new MessageRepository(messageDao);
+        messageRepository = new MessageRepository(messageDao);
 
         MessageViewModel.Factory factory = new MessageViewModel.Factory(getApplication(), messageRepository);
         MessageViewModel messageViewModel = ViewModelProviders.of(this, factory).get(MessageViewModel.class);
@@ -52,5 +58,15 @@ public class MessageActivity extends BaseActivity implements MessageView {
     @Override
     public void submitList(@Nullable PagedList<Message> list) {
         messageAdapter.submitList(list);
+    }
+
+    @Override
+    public void sendMessage(Message message) {
+        messageRepository.save(message);
+    }
+
+    @OnClick(R.id.activity_message_send_button)
+    protected void onSendClicked() {
+        messagePresenter.onSendClicked(editText.getText());
     }
 }

@@ -9,11 +9,11 @@ public class MessageItemCallback extends DiffUtil.ItemCallback<Message> {
 
     @Override
     public boolean areItemsTheSame(Message oldItem, Message newItem) {
-        return Objects.equal(oldItem.get().getMessageId(), newItem.get().getMessageId());
+        return Objects.equal(oldItem.getId(), newItem.getId());
     }
 
     @Override
     public boolean areContentsTheSame(Message oldItem, Message newItem) {
-        return oldItem.get().getCreatedAt() == newItem.get().getCreatedAt();
+        return Objects.equal(oldItem.getId(), newItem.getId());
     }
 }

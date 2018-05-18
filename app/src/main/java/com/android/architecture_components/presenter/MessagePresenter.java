@@ -4,6 +4,7 @@ import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.Observer;
 import android.arch.paging.PagedList;
 import android.support.annotation.Nullable;
+import android.text.Editable;
 
 import com.android.architecture_components.internal.entity.Message;
 import com.android.architecture_components.ui.MessageView;
@@ -23,5 +24,9 @@ public class MessagePresenter extends Presenter<MessageView, MessageViewModel> {
                 view.submitList(messages);
             }
         });
+    }
+
+    public void onSendClicked(Editable editable) {
+        view.sendMessage(Message.create());
     }
 }

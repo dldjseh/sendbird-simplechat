@@ -12,9 +12,7 @@ public class Message extends SendBirdObject<BaseMessage> {
         return BaseMessage.buildFromSerializedData(data);
     }
 
-    public static Message create(BaseMessage baseMessage) {
-        Message message = new Message();
-        message.set(baseMessage.serialize());
-        return message;
+    public static Message create() {
+        return new Message();
     }
 }
