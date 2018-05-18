@@ -58,13 +58,13 @@ public class MessageActivity extends BaseActivity implements MessageView {
     }
 
     @Override
-    public void submitList(@Nullable PagedList<Message> list) {
-        messageAdapter.submitList(list);
+    public void sendMessage(Message message) {
+        messageRepository.save(message);
     }
 
     @Override
-    public void sendMessage(Message message) {
-        messageRepository.save(message);
+    public void submitList(@Nullable PagedList<Message> list) {
+        messageAdapter.submitList(list);
     }
 
     @OnClick(R.id.activity_message_send_button)
