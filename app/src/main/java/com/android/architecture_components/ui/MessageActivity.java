@@ -51,7 +51,9 @@ public class MessageActivity extends BaseActivity implements MessageView {
         MessageItemCallback messageItemCallback = new MessageItemCallback();
         messageAdapter = new MessageAdapter(messageItemCallback);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(messageAdapter);
     }
 
