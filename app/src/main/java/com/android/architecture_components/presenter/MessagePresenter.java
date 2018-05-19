@@ -6,13 +6,13 @@ import android.arch.paging.PagedList;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 
-import com.android.architecture_components.internal.entity.Message;
-import com.android.architecture_components.ui.MessageView;
+import com.android.architecture_components.persistence.entity.Message;
+import com.android.architecture_components.ui.MessageRecyclerView;
 import com.android.architecture_components.viewmodel.MessageViewModel;
 
-public class MessagePresenter extends Presenter<MessageView, MessageViewModel> {
+public class MessagePresenter extends Presenter<MessageRecyclerView, MessageViewModel> {
 
-    public MessagePresenter(LifecycleOwner lifecycleOwner, MessageView messageView, MessageViewModel messageViewModel) {
+    public MessagePresenter(LifecycleOwner lifecycleOwner, MessageRecyclerView messageView, MessageViewModel messageViewModel) {
         super(lifecycleOwner, messageView, messageViewModel);
     }
 

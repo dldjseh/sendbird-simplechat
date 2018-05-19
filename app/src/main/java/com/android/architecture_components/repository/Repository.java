@@ -2,9 +2,10 @@ package com.android.architecture_components.repository;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.paging.PagedList;
+import android.support.annotation.Nullable;
 
-import com.android.architecture_components.internal.dao.Dao;
-import com.android.architecture_components.internal.entity.SendBirdObject;
+import com.android.architecture_components.persistence.dao.Dao;
+import com.android.architecture_components.persistence.entity.SendBirdObject;
 
 public abstract class Repository<DAO extends Dao, OBJ extends SendBirdObject> {
 
@@ -14,7 +15,17 @@ public abstract class Repository<DAO extends Dao, OBJ extends SendBirdObject> {
         this.dao = dao;
     }
 
-    abstract public LiveData<PagedList<OBJ>> getAll();
+    @Nullable
+    public LiveData<PagedList<OBJ>> getAll() {
+        return null;
+    }
 
-    abstract public void save(OBJ obj);
+    @Nullable
+    public LiveData<OBJ> getFirst() {
+        return null;
+    }
+
+    public void save(OBJ obj) {
+
+    }
 }

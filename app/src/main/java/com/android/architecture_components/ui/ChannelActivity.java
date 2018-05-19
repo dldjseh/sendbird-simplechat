@@ -7,13 +7,13 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.EditText;
 
 import com.android.architecture_components.R;
-import com.android.architecture_components.internal.entity.Channel;
-import com.android.architecture_components.internal.entity.Message;
+import com.android.architecture_components.persistence.entity.Channel;
+import com.android.architecture_components.persistence.entity.Message;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class ChannelActivity extends BaseActivity implements ChannelView {
+public class ChannelActivity extends BaseActivity implements ChannelRecyclerView {
 
     @BindView(R.id.activity_channel_recycler_view)
     RecyclerView recyclerView;

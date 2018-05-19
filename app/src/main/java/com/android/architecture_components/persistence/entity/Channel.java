@@ -1,4 +1,4 @@
-package com.android.architecture_components.internal.entity;
+package com.android.architecture_components.persistence.entity;
 
 import android.arch.persistence.room.Entity;
 import android.support.annotation.NonNull;

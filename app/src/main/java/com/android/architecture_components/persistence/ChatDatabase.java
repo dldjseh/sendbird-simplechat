@@ -1,12 +1,12 @@
-package com.android.architecture_components.internal;
+package com.android.architecture_components.persistence;
 
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
-import com.android.architecture_components.internal.dao.MessageDao;
-import com.android.architecture_components.internal.entity.Message;
+import com.android.architecture_components.persistence.dao.MessageDao;
+import com.android.architecture_components.persistence.entity.Message;
 
 @Database(entities = {Message.class}, version = 1)
 public abstract class ChatDatabase extends RoomDatabase {

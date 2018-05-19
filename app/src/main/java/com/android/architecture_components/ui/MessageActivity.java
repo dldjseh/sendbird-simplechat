@@ -9,9 +9,9 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.EditText;
 
 import com.android.architecture_components.R;
-import com.android.architecture_components.internal.ChatDatabase;
-import com.android.architecture_components.internal.dao.MessageDao;
-import com.android.architecture_components.internal.entity.Message;
+import com.android.architecture_components.persistence.ChatDatabase;
+import com.android.architecture_components.persistence.dao.MessageDao;
+import com.android.architecture_components.persistence.entity.Message;
 import com.android.architecture_components.presenter.MessagePresenter;
 import com.android.architecture_components.repository.MessageRepository;
 import com.android.architecture_components.ui.adapter.MessageAdapter;
@@ -21,7 +21,7 @@ import com.android.architecture_components.viewmodel.MessageViewModel;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class MessageActivity extends BaseActivity implements MessageView {
+public class MessageActivity extends BaseActivity implements MessageRecyclerView {
 
     private MessageRepository messageRepository;
 

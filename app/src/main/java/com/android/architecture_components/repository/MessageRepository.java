@@ -4,8 +4,8 @@ import android.arch.lifecycle.LiveData;
 import android.arch.paging.LivePagedListBuilder;
 import android.arch.paging.PagedList;
 
-import com.android.architecture_components.internal.dao.MessageDao;
-import com.android.architecture_components.internal.entity.Message;
+import com.android.architecture_components.persistence.dao.MessageDao;
+import com.android.architecture_components.persistence.entity.Message;
 
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;

@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.architecture_components.R;
-import com.android.architecture_components.internal.entity.Message;
+import com.android.architecture_components.persistence.entity.Message;
 
 import butterknife.BindView;
 
