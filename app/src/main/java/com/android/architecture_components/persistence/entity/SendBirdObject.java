@@ -4,7 +4,7 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
-public abstract class SendBirdObject {
+public abstract class SendBirdObject<OBJ> {
 
     @NonNull
     @PrimaryKey
@@ -37,4 +37,6 @@ public abstract class SendBirdObject {
     public void setSerializedData(byte[] serializedData) {
         this.serializedData = serializedData;
     }
+
+    public abstract OBJ get();
 }

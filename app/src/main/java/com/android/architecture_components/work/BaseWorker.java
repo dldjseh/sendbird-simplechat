@@ -14,9 +14,13 @@ import androidx.work.Data;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkRequest;
 import androidx.work.Worker;
+import io.reactivex.Flowable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.PublishSubject;
 
-public abstract class BaseWorker extends Worker {
+public abstract class BaseWorker<RESULT> extends Worker {
 
     private static PublishSubject<Object> publishSubject = PublishSubject.create();
 
@@ -54,25 +58,56 @@ public abstract class BaseWorker extends Worker {
         }
     }
 
-    protected static EkoWorkHandler workerHandler = new EkoWorkHandler() {
+    protected EkoWorkHandler workerHandler = new EkoWorkHandler() {
 
         @Override
         public void onConnected(User user, SendBirdException e) {
-            handlerException(user, e);
+            try {
+                handlerException((RESULT) user, e);
+            } catch (Exception e2) {
+                publishSubject.onError(e2);
+            }
         }
 
         @Override
         public void onResult(GroupChannel groupChannel, SendBirdException e) {
-            handlerException(groupChannel, e);
+            try {
+                handlerException((RESULT) groupChannel, e);
+            } catch (Exception e2) {
+                publishSubject.onError(e2);
+            }
         }
 
-        private void handlerException(Object object, Exception e) {
+        private void handlerException(RESULT result, Exception e) {
             if (e != null) {
                 publishSubject.onError(e);
             } else {
-                publishSubject.onNext(object);
-                publishSubject.onComplete();
+                Flowable.just(result)
+                        .observeOn(Schedulers.io())
+                        .doOnNext(new Consumer<RESULT>() {
+                            @Override
+                            public void accept(RESULT result) throws Exception {
+                                handleResult(result);
+                            }
+                        })
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .doOnNext(new Consumer<RESULT>() {
+                            @Override
+                            public void accept(RESULT result) throws Exception {
+                                publishSubject.onNext(result);
+                                publishSubject.onComplete();
+                            }
+                        })
+                        .doOnError(new Consumer<Throwable>() {
+                            @Override
+                            public void accept(Throwable throwable) throws Exception {
+                                publishSubject.onError(throwable);
+                            }
+                        })
+                        .subscribe();
             }
         }
     };
+
+    protected abstract void handleResult(RESULT result);
 }

@@ -50,7 +50,7 @@ public class ChannelActivity extends BaseActivity implements ChannelRecyclerView
 
     @Override
     public void displayLoggedInSnackbar() {
-        Snackbar.make(recyclerView, "Logged In", Snackbar.LENGTH_LONG).show();
+        Snackbar.make(recyclerView, "Logged In", Snackbar.LENGTH_SHORT).show();
     }
 
     @Override

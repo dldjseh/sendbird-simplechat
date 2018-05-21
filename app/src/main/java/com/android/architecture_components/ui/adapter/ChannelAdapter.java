@@ -33,7 +33,7 @@ public class ChannelAdapter extends PagedListAdapter<Channel, ChannelAdapter.Cha
         if (channel == null) {
             holder.text.setText("null");
         } else {
-            holder.text.setText(channel.getId());
+            holder.text.setText(channel.get().getName());
         }
     }
 
