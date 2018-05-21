@@ -4,7 +4,7 @@ import android.arch.persistence.room.Entity;
 import android.support.annotation.NonNull;
 
 import com.google.common.collect.Lists;
-import com.sendbird.android.GroupChannel;
+import com.sendbird.android.OpenChannel;
 
 import java.util.List;
 
@@ -26,14 +26,14 @@ public class Channel extends SendBirdObject {
         this.name = name;
     }
 
-    public static Channel create(GroupChannel groupChannel) {
-        return new Channel(groupChannel.getUrl(), groupChannel.getName());
+    public static Channel create(OpenChannel openChannel) {
+        return new Channel(openChannel.getUrl(), openChannel.getName());
     }
 
-    public static List<Channel> create(List<GroupChannel> groupChannels) {
+    public static List<Channel> create(List<OpenChannel> openChannels) {
         List<Channel> result = Lists.newArrayList();
-        for (GroupChannel groupChannel : groupChannels) {
-            result.add(create(groupChannel));
+        for (OpenChannel openChannel : openChannels) {
+            result.add(create(openChannel));
         }
         return result;
     }

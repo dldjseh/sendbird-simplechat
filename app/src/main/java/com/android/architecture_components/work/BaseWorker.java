@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.google.common.collect.Maps;
-import com.sendbird.android.GroupChannel;
+import com.sendbird.android.OpenChannel;
 import com.sendbird.android.SendBirdException;
 import com.sendbird.android.User;
 
@@ -28,6 +28,11 @@ public abstract class BaseWorker<RESULT> extends Worker {
     @Nullable
     protected String getString(String key) {
         return getInputData().getString(key, null);
+    }
+
+    @Nullable
+    protected String[] getStringArray(String key) {
+        return getInputData().getStringArray(key);
     }
 
     @NonNull
@@ -76,16 +81,16 @@ public abstract class BaseWorker<RESULT> extends Worker {
         }
 
         @Override
-        public void onResult(GroupChannel groupChannel, SendBirdException e) {
+        public void onResult(OpenChannel openChannel, SendBirdException e) {
             try {
-                handlerException((RESULT) groupChannel, e);
+                handlerException((RESULT) openChannel, e);
             } catch (Exception e2) {
                 publishSubject.onError(e2);
             }
         }
 
         @Override
-        public void onResult(List<GroupChannel> list, SendBirdException e) {
+        public void onResult(List<OpenChannel> list, SendBirdException e) {
             try {
                 handlerException((RESULT) list, e);
             } catch (Exception e2) {

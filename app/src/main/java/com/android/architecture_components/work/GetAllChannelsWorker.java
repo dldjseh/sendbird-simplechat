@@ -4,23 +4,23 @@ import android.support.annotation.NonNull;
 
 import com.android.architecture_components.persistence.ChatDatabase;
 import com.android.architecture_components.persistence.entity.Channel;
-import com.sendbird.android.GroupChannel;
+import com.sendbird.android.OpenChannel;
 
 import java.util.List;
 
-public class GetAllGroupChannelsWorker extends BaseWorker<List<GroupChannel>> {
+public class GetAllChannelsWorker extends BaseWorker<List<OpenChannel>> {
 
     @NonNull
     @Override
     public WorkerResult doWork() {
-        GroupChannel.createMyGroupChannelListQuery().next(workerHandler);
+        OpenChannel.createOpenChannelListQuery().next(workerHandler);
         return super.doWork();
     }
 
     @Override
-    protected void handleResult(List<GroupChannel> groupChannels) {
+    protected void handleResult(List<OpenChannel> openChannels) {
         ChatDatabase.getInstance(getApplicationContext())
                 .getChannelDao()
-                .save(Channel.create(groupChannels));
+                .save(Channel.create(openChannels));
     }
 }
