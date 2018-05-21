@@ -8,6 +8,8 @@ import android.arch.persistence.room.Query;
 
 import com.android.architecture_components.persistence.entity.Channel;
 
+import java.util.List;
+
 @Dao
 public interface ChannelDao extends com.android.architecture_components.persistence.dao.Dao {
 
@@ -16,4 +18,7 @@ public interface ChannelDao extends com.android.architecture_components.persiste
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void save(Channel... channels);
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void save(List<Channel> channels);
 }

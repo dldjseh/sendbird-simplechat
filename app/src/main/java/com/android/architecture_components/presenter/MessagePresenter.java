@@ -32,6 +32,6 @@ public class MessagePresenter extends Presenter<MessageRecyclerView, MessageView
     }
 
     public void onSendClicked(Editable editable) {
-        androidViewModel.save(new Message());
+        androidViewModel.save(new Message(""));
     }
 }

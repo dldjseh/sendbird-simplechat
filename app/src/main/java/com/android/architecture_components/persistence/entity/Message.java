@@ -1,18 +1,16 @@
 package com.android.architecture_components.persistence.entity;
 
 import android.arch.persistence.room.Entity;
-
-import com.sendbird.android.BaseMessage;
+import android.support.annotation.NonNull;
 
 @Entity
-public class Message extends SendBirdObject<BaseMessage> {
+public class Message extends SendBirdObject {
 
-    @Override
-    public BaseMessage get() {
-        return BaseMessage.buildFromSerializedData(getSerializedData());
+    public Message(@NonNull String id) {
+        super(id);
     }
 
     public static Message create() {
-        return new Message();
+        return new Message("");
     }
 }

@@ -28,7 +28,7 @@ public class AuthActivity extends BaseActivity implements AuthView {
 
     @Override
     public void submitUser(User user) {
-        Toast.makeText(this, "Hello " + user.get().getUserId(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Hello " + user.getId(), Toast.LENGTH_SHORT).show();
         ChannelIntent intent = new ChannelIntent(this);
         startActivityForResult(intent, intent.getRequestCode());
         finish();

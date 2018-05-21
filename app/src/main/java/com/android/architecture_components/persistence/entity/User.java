@@ -4,18 +4,24 @@ import android.arch.persistence.room.Entity;
 import android.support.annotation.NonNull;
 
 @Entity
-public class User extends SendBirdObject<com.sendbird.android.User> {
+public class User extends SendBirdObject {
 
-    public User(@NonNull String id, byte[] serializedData) {
-        super(id, serializedData);
+    private boolean isActive;
+
+    public User(@NonNull String id, boolean isActive) {
+        super(id);
+        this.isActive = isActive;
     }
 
-    @Override
-    public com.sendbird.android.User get() {
-        return com.sendbird.android.User.buildFromSerializedData(getSerializedData());
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 
     public static User create(com.sendbird.android.User sendBirdUser) {
-        return new User(sendBirdUser.getUserId(), sendBirdUser.serialize());
+        return new User(sendBirdUser.getUserId(), sendBirdUser.isActive());
     }
 }

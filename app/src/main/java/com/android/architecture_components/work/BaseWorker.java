@@ -8,6 +8,7 @@ import com.sendbird.android.GroupChannel;
 import com.sendbird.android.SendBirdException;
 import com.sendbird.android.User;
 
+import java.util.List;
 import java.util.Map;
 
 import androidx.work.Data;
@@ -70,9 +71,23 @@ public abstract class BaseWorker<RESULT> extends Worker {
         }
 
         @Override
+        public void onDisconnected() {
+            handleResult();
+        }
+
+        @Override
         public void onResult(GroupChannel groupChannel, SendBirdException e) {
             try {
                 handlerException((RESULT) groupChannel, e);
+            } catch (Exception e2) {
+                publishSubject.onError(e2);
+            }
+        }
+
+        @Override
+        public void onResult(List<GroupChannel> list, SendBirdException e) {
+            try {
+                handlerException((RESULT) list, e);
             } catch (Exception e2) {
                 publishSubject.onError(e2);
             }
@@ -109,5 +124,11 @@ public abstract class BaseWorker<RESULT> extends Worker {
         }
     };
 
-    protected abstract void handleResult(RESULT result);
+    protected void handleResult() {
+
+    }
+
+    protected void handleResult(RESULT result) {
+
+    }
 }

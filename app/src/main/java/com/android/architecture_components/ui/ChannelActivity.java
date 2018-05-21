@@ -42,9 +42,7 @@ public class ChannelActivity extends BaseActivity implements ChannelRecyclerView
 
         channelAdapter = new ChannelAdapter(new ChannelItemCallback());
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setStackFromEnd(true);
-        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(channelAdapter);
     }
 

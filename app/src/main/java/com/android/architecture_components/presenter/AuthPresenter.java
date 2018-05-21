@@ -28,8 +28,8 @@ public class AuthPresenter extends Presenter<AuthView, UserViewModel> {
         androidViewModel.getUser().observe(lifecycleOwner, new Observer<User>() {
             @Override
             public void onChanged(@Nullable User user) {
-                // FIXME: 5/21/18 apply non-null operation.
-                if (user != null) {
+                // FIXME: 5/21/18 apply filter operation.
+                if (user != null && user.isActive()) {
                     view.submitUser(user);
                 }
             }

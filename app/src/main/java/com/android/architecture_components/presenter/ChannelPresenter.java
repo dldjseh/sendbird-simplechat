@@ -10,6 +10,8 @@ import com.android.architecture_components.persistence.entity.Channel;
 import com.android.architecture_components.ui.ChannelRecyclerView;
 import com.android.architecture_components.viewmodel.ChannelViewModel;
 
+import androidx.work.WorkStatus;
+
 public class ChannelPresenter extends Presenter<ChannelRecyclerView, ChannelViewModel> {
 
     public ChannelPresenter(LifecycleOwner lifecycleOwner, ChannelRecyclerView channelRecyclerView, ChannelViewModel channelViewModel) {
@@ -18,6 +20,13 @@ public class ChannelPresenter extends Presenter<ChannelRecyclerView, ChannelView
 
     @Override
     protected void observe() {
+        androidViewModel.getChannelsFromNetwork().observe(lifecycleOwner, new Observer<WorkStatus>() {
+            @Override
+            public void onChanged(@Nullable WorkStatus workStatus) {
+
+            }
+        });
+
         androidViewModel.getChannels().observe(lifecycleOwner, new Observer<PagedList<Channel>>() {
             @Override
             public void onChanged(@Nullable PagedList<Channel> channels) {

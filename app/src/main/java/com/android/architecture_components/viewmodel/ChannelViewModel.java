@@ -11,6 +11,8 @@ import com.android.architecture_components.persistence.ChatDatabase;
 import com.android.architecture_components.persistence.entity.Channel;
 import com.android.architecture_components.repository.ChannelRepository;
 
+import androidx.work.WorkStatus;
+
 public class ChannelViewModel extends BaseAndroidViewModel<ChannelRepository> {
 
     private LiveData<PagedList<Channel>> channels;
@@ -22,6 +24,10 @@ public class ChannelViewModel extends BaseAndroidViewModel<ChannelRepository> {
 
     public LiveData<PagedList<Channel>> getChannels() {
         return channels;
+    }
+
+    public LiveData<WorkStatus> getChannelsFromNetwork() {
+        return repository.getAllFromNetwork();
     }
 
     public void create(String channelName) {

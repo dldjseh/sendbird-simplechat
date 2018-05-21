@@ -7,6 +7,7 @@ import android.arch.paging.PagedList;
 import com.android.architecture_components.persistence.dao.ChannelDao;
 import com.android.architecture_components.persistence.entity.Channel;
 import com.android.architecture_components.work.CreateChannelWorker;
+import com.android.architecture_components.work.GetAllChannelsWorker;
 
 import androidx.work.WorkStatus;
 
@@ -25,6 +26,11 @@ public class ChannelRepository extends Repository<ChannelDao, Channel> {
                 .build();
 
         return new LivePagedListBuilder<>(dao.getAll(), config).build();
+    }
+
+    public LiveData<WorkStatus> getAllFromNetwork() {
+        return enqueue(new GetAllChannelsWorker.Builder<GetAllChannelsWorker>()
+                .build(GetAllChannelsWorker.class));
     }
 
     public LiveData<WorkStatus> create(String channelName) {
