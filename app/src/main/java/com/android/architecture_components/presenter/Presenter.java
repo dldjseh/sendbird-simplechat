@@ -15,11 +15,16 @@ public abstract class Presenter<V extends BaseView, AVM extends AndroidViewModel
         this.view = view;
         this.lifecycleOwner = lifecycleOwner;
         this.androidViewModel = androidViewModel;
+        init();
     }
 
-    public final void init() {
+    private void init() {
         observe();
+        initUI();
     }
 
     abstract protected void observe();
+
+    abstract protected void initUI();
+
 }

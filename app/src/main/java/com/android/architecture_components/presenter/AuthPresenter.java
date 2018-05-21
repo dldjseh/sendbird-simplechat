@@ -25,4 +25,9 @@ public class AuthPresenter extends Presenter<AuthView, UserViewModel> {
             }
         });
     }
+
+    @Override
+    protected void initUI() {
+
+    }
 }

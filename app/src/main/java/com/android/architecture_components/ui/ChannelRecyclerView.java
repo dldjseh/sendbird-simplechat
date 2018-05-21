@@ -5,6 +5,8 @@ import com.android.architecture_components.persistence.entity.Message;
 
 public interface ChannelRecyclerView extends BaseRecyclerView<Message> {
 
+    void displayLoggedInSnackbar();
+
     void createChannel(Channel channel);
 
     void joinChannel(String channelId);
