@@ -9,11 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.EditText;
 
 import com.android.architecture_components.R;
-import com.android.architecture_components.persistence.ChatDatabase;
-import com.android.architecture_components.persistence.dao.MessageDao;
 import com.android.architecture_components.persistence.entity.Message;
 import com.android.architecture_components.presenter.MessagePresenter;
-import com.android.architecture_components.repository.MessageRepository;
 import com.android.architecture_components.ui.adapter.MessageAdapter;
 import com.android.architecture_components.ui.adapter.MessageItemCallback;
 import com.android.architecture_components.viewmodel.MessageViewModel;
@@ -22,8 +19,6 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 public class MessageActivity extends BaseActivity implements MessageRecyclerView {
-
-    private MessageRepository messageRepository;
 
     private MessagePresenter messagePresenter;
 
@@ -39,10 +34,7 @@ public class MessageActivity extends BaseActivity implements MessageRecyclerView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
 
-        MessageDao messageDao = ChatDatabase.getInstance(this).getMessageDao();
-        messageRepository = new MessageRepository(messageDao);
-
-        MessageViewModel.Factory factory = new MessageViewModel.Factory(getApplication(), messageRepository);
+        MessageViewModel.Factory factory = new MessageViewModel.Factory(getApplication());
         MessageViewModel messageViewModel = ViewModelProviders.of(this, factory).get(MessageViewModel.class);
 
         messagePresenter = new MessagePresenter(this, this, messageViewModel);
@@ -55,11 +47,6 @@ public class MessageActivity extends BaseActivity implements MessageRecyclerView
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(messageAdapter);
-    }
-
-    @Override
-    public void sendMessage(Message message) {
-        messageRepository.save(message);
     }
 
     @Override

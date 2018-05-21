@@ -6,6 +6,7 @@ import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.support.annotation.NonNull;
 
+import com.android.architecture_components.persistence.ChatDatabase;
 import com.android.architecture_components.persistence.entity.User;
 import com.android.architecture_components.repository.UserRepository;
 
@@ -34,9 +35,9 @@ public class UserViewModel extends BaseAndroidViewModel<UserRepository> {
         @NonNull
         private UserRepository repository;
 
-        public Factory(@NonNull Application application, @NonNull UserRepository repository) {
+        public Factory(@NonNull Application application) {
             this.application = application;
-            this.repository = repository;
+            this.repository = new UserRepository(ChatDatabase.getInstance(application).getUserDao());
         }
 
         @NonNull

@@ -7,6 +7,7 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.arch.paging.PagedList;
 import android.support.annotation.NonNull;
 
+import com.android.architecture_components.persistence.ChatDatabase;
 import com.android.architecture_components.persistence.entity.Message;
 import com.android.architecture_components.repository.MessageRepository;
 
@@ -23,6 +24,10 @@ public class MessageViewModel extends BaseAndroidViewModel<MessageRepository> {
         return messages;
     }
 
+    public void save(Message message) {
+        repository.save(message);
+    }
+
     public static class Factory extends ViewModelProvider.NewInstanceFactory {
 
         @NonNull
@@ -31,9 +36,9 @@ public class MessageViewModel extends BaseAndroidViewModel<MessageRepository> {
         @NonNull
         private MessageRepository repository;
 
-        public Factory(@NonNull Application application, @NonNull MessageRepository repository) {
+        public Factory(@NonNull Application application) {
             this.application = application;
-            this.repository = repository;
+            this.repository = new MessageRepository(ChatDatabase.getInstance(application).getMessageDao());
         }
 
         @NonNull
