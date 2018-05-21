@@ -10,6 +10,8 @@ import com.android.architecture_components.persistence.ChatDatabase;
 import com.android.architecture_components.persistence.entity.User;
 import com.android.architecture_components.repository.UserRepository;
 
+import androidx.work.WorkStatus;
+
 public class UserViewModel extends BaseAndroidViewModel<UserRepository> {
 
     private LiveData<User> user;
@@ -23,8 +25,8 @@ public class UserViewModel extends BaseAndroidViewModel<UserRepository> {
         return user;
     }
 
-    public void connect() {
-        repository.connect();
+    public LiveData<WorkStatus> connect() {
+        return repository.connect();
     }
 
     public static class Factory extends ViewModelProvider.NewInstanceFactory {

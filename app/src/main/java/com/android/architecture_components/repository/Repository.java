@@ -6,6 +6,12 @@ import android.support.annotation.Nullable;
 
 import com.android.architecture_components.persistence.dao.Dao;
 import com.android.architecture_components.persistence.entity.SendBirdObject;
+import com.android.architecture_components.work.EkoWorkManager;
+
+import java.util.UUID;
+
+import androidx.work.WorkRequest;
+import androidx.work.WorkStatus;
 
 public abstract class Repository<DAO extends Dao, OBJ extends SendBirdObject> {
 
@@ -27,5 +33,11 @@ public abstract class Repository<DAO extends Dao, OBJ extends SendBirdObject> {
 
     public void save(OBJ obj) {
 
+    }
+
+    protected final LiveData<WorkStatus> enqueue(WorkRequest request) {
+        UUID workId = request.getId();
+        EkoWorkManager.getInstance().enqueue(request);
+        return EkoWorkManager.getInstance().getStatusById(workId);
     }
 }

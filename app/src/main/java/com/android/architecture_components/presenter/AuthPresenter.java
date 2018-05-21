@@ -8,6 +8,8 @@ import com.android.architecture_components.persistence.entity.User;
 import com.android.architecture_components.ui.AuthView;
 import com.android.architecture_components.viewmodel.UserViewModel;
 
+import androidx.work.WorkStatus;
+
 public class AuthPresenter extends Presenter<AuthView, UserViewModel> {
 
     public AuthPresenter(LifecycleOwner lifecycleOwner, AuthView authView, UserViewModel userViewModel) {
@@ -16,7 +18,12 @@ public class AuthPresenter extends Presenter<AuthView, UserViewModel> {
 
     @Override
     protected void observe() {
-        androidViewModel.connect();
+        androidViewModel.connect().observe(lifecycleOwner, new Observer<WorkStatus>() {
+            @Override
+            public void onChanged(@Nullable WorkStatus workStatus) {
+
+            }
+        });
 
         androidViewModel.getUser().observe(lifecycleOwner, new Observer<User>() {
             @Override
