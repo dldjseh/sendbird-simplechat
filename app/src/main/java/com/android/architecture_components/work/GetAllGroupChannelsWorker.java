@@ -8,7 +8,7 @@ import com.sendbird.android.GroupChannel;
 
 import java.util.List;
 
-public class GetAllChannelsWorker extends BaseWorker<List<GroupChannel>> {
+public class GetAllGroupChannelsWorker extends BaseWorker<List<GroupChannel>> {
 
     @NonNull
     @Override
