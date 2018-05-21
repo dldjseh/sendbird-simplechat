@@ -10,18 +10,11 @@ import com.android.architecture_components.repository.MessageRepository;
 
 public class MessageViewModel extends BaseAndroidViewModel<MessageRepository> {
 
-    private LiveData<PagedList<Message>> messages;
-
     private MessageViewModel(@NonNull Application application, @NonNull MessageRepository messageRepository) {
         super(application, messageRepository);
     }
 
-    @Override
-    protected void init(MessageRepository repository) {
-        messages = repository.getAll();
-    }
-
     public LiveData<PagedList<Message>> getMessages() {
-        return messages;
+        return repository.getAll();
     }
 }

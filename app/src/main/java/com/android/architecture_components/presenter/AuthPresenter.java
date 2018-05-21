@@ -16,6 +16,8 @@ public class AuthPresenter extends Presenter<AuthView, UserViewModel> {
 
     @Override
     protected void observe() {
+        androidViewModel.connect();
+
         androidViewModel.getUser().observe(lifecycleOwner, new Observer<User>() {
             @Override
             public void onChanged(@Nullable User user) {

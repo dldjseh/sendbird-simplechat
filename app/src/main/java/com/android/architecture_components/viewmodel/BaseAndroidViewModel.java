@@ -10,13 +10,11 @@ import com.android.architecture_components.repository.Repository;
 
 public class BaseAndroidViewModel<REPO extends Repository> extends AndroidViewModel {
 
+    protected REPO repository;
+
     protected BaseAndroidViewModel(@NonNull Application application, @NonNull REPO repository) {
         super(application);
-        init(repository);
-    }
-
-    protected void init(REPO repository) {
-
+        this.repository = repository;
     }
 
     public static class Factory<REPO extends Repository> extends ViewModelProvider.NewInstanceFactory {

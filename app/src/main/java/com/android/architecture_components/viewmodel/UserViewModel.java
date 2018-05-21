@@ -7,6 +7,8 @@ import android.support.annotation.NonNull;
 import com.android.architecture_components.persistence.entity.User;
 import com.android.architecture_components.repository.UserRepository;
 
+import io.reactivex.Flowable;
+
 public class UserViewModel extends BaseAndroidViewModel<UserRepository> {
 
     private LiveData<com.android.architecture_components.persistence.entity.User> user;
@@ -15,12 +17,11 @@ public class UserViewModel extends BaseAndroidViewModel<UserRepository> {
         super(application, userRepository);
     }
 
-    @Override
-    protected void init(UserRepository repository) {
-        user = repository.getFirst();
+    public LiveData<User> getUser() {
+        return repository.getFirst();
     }
 
-    public LiveData<User> getUser() {
-        return user;
+    public Flowable<com.sendbird.android.User> connect() {
+        return repository.connect();
     }
 }
