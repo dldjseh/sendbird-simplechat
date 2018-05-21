@@ -6,10 +6,9 @@ import android.arch.paging.PagedList;
 
 import com.android.architecture_components.persistence.dao.ChannelDao;
 import com.android.architecture_components.persistence.entity.Channel;
+import com.android.architecture_components.work.CreateChannelWorker;
 
-import io.reactivex.Observable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
+import androidx.work.WorkStatus;
 
 public class ChannelRepository extends Repository<ChannelDao, Channel> {
 
@@ -28,16 +27,9 @@ public class ChannelRepository extends Repository<ChannelDao, Channel> {
         return new LivePagedListBuilder<>(dao.getAll(), config).build();
     }
 
-    @Override
-    public void save(Channel channel) {
-        Observable.just(channel)
-                .doOnNext(new Consumer<Channel>() {
-                    @Override
-                    public void accept(Channel channel) {
-                        dao.save(channel);
-                    }
-                })
-                .subscribeOn(Schedulers.io())
-                .subscribe();
+    public LiveData<WorkStatus> create(String channelName) {
+        return enqueue(new CreateChannelWorker.Builder<CreateChannelWorker>()
+                .putData(CreateChannelWorker.CHANNEL_NAME, channelName)
+                .build(CreateChannelWorker.class));
     }
 }

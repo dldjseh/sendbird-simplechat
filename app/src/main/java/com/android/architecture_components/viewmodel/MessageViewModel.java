@@ -25,7 +25,7 @@ public class MessageViewModel extends BaseAndroidViewModel<MessageRepository> {
     }
 
     public void save(Message message) {
-        repository.save(message);
+
     }
 
     public static class Factory extends ViewModelProvider.NewInstanceFactory {

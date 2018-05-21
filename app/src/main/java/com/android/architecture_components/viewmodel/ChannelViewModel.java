@@ -24,8 +24,8 @@ public class ChannelViewModel extends BaseAndroidViewModel<ChannelRepository> {
         return channels;
     }
 
-    public void save(Channel channel) {
-        repository.save(channel);
+    public void create(String channelName) {
+        repository.create(channelName);
     }
 
     public static class Factory extends ViewModelProvider.NewInstanceFactory {

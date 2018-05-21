@@ -5,13 +5,15 @@ import android.arch.paging.PagedList;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.EditText;
 
 import com.android.architecture_components.R;
 import com.android.architecture_components.persistence.entity.Channel;
-import com.android.architecture_components.persistence.entity.Message;
 import com.android.architecture_components.presenter.ChannelPresenter;
+import com.android.architecture_components.ui.adapter.ChannelAdapter;
+import com.android.architecture_components.ui.adapter.ChannelItemCallback;
 import com.android.architecture_components.viewmodel.ChannelViewModel;
 
 import butterknife.BindView;
@@ -26,6 +28,8 @@ public class ChannelActivity extends BaseActivity implements ChannelRecyclerView
 
     private ChannelPresenter channelPresenter;
 
+    private ChannelAdapter channelAdapter;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +39,13 @@ public class ChannelActivity extends BaseActivity implements ChannelRecyclerView
         ChannelViewModel channelViewModel = ViewModelProviders.of(this, factory).get(ChannelViewModel.class);
 
         channelPresenter = new ChannelPresenter(this, this, channelViewModel);
+
+        channelAdapter = new ChannelAdapter(new ChannelItemCallback());
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(channelAdapter);
     }
 
     @Override
@@ -43,22 +54,12 @@ public class ChannelActivity extends BaseActivity implements ChannelRecyclerView
     }
 
     @Override
-    public void createChannel(Channel channel) {
-
-    }
-
-    @Override
-    public void joinChannel(String channelId) {
-
-    }
-
-    @Override
-    public void submitList(@Nullable PagedList<Message> list) {
-
+    public void submitList(@Nullable PagedList<Channel> list) {
+        channelAdapter.submitList(list);
     }
 
     @OnClick(R.id.activity_channel_create_button)
-    protected void onCreateClicked() {
-
+    protected void onCreateChannelClicked() {
+        channelPresenter.onCreateChannelClicked(editText.getText());
     }
 }

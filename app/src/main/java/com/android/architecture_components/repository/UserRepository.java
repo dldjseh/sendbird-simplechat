@@ -4,12 +4,9 @@ import android.arch.lifecycle.LiveData;
 
 import com.android.architecture_components.persistence.dao.UserDao;
 import com.android.architecture_components.persistence.entity.User;
-import com.android.architecture_components.work.sendbird.ConnectWorker;
+import com.android.architecture_components.work.ConnectWorker;
 
 import androidx.work.WorkStatus;
-import io.reactivex.Observable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 
 public class UserRepository extends Repository<UserDao, User> {
 
@@ -20,19 +17,6 @@ public class UserRepository extends Repository<UserDao, User> {
     @Override
     public LiveData<User> getFirst() {
         return dao.getFirst();
-    }
-
-    @Override
-    public void save(User user) {
-        Observable.just(user)
-                .doOnNext(new Consumer<User>() {
-                    @Override
-                    public void accept(User user) {
-                        dao.save(user);
-                    }
-                })
-                .subscribeOn(Schedulers.io())
-                .subscribe();
     }
 
     public LiveData<WorkStatus> connect() {

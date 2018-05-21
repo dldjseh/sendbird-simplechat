@@ -31,20 +31,16 @@ public abstract class Repository<DAO extends Dao, OBJ extends SendBirdObject> {
         return null;
     }
 
-    public void save(OBJ obj) {
-
-    }
-
     protected final LiveData<WorkStatus> enqueue(WorkRequest request) {
         EkoWorkManager.getInstance().enqueue(request);
-        return getStatusById(request.getId());
+        return getWorkStatusById(request.getId());
     }
 
     protected final void enqueue(WorkRequest... requests) {
         EkoWorkManager.getInstance().enqueue(requests);
     }
 
-    protected final LiveData<WorkStatus> getStatusById(UUID workId) {
+    protected final LiveData<WorkStatus> getWorkStatusById(UUID workId) {
         return EkoWorkManager.getInstance().getStatusById(workId);
     }
 }
