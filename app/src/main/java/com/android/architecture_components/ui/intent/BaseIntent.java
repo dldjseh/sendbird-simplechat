@@ -9,7 +9,8 @@ public class BaseIntent extends Intent {
 
     protected BaseIntent(Context packageContext, Class<?> cls) {
         super(packageContext, cls);
-        requestCode = cls.getSimpleName().hashCode();
+        // FIXME: 5/21/18
+        requestCode = 0;
     }
 
     public int getRequestCode() {

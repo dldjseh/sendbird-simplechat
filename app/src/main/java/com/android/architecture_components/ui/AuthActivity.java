@@ -5,8 +5,11 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.android.architecture_components.R;
+import com.android.architecture_components.persistence.ChatDatabase;
+import com.android.architecture_components.persistence.dao.UserDao;
 import com.android.architecture_components.persistence.entity.User;
 import com.android.architecture_components.presenter.AuthPresenter;
+import com.android.architecture_components.repository.UserRepository;
 import com.android.architecture_components.ui.intent.ChannelIntent;
 import com.android.architecture_components.viewmodel.UserViewModel;
 
@@ -19,7 +22,12 @@ public class AuthActivity extends BaseActivity implements AuthView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth);
 
-        UserViewModel userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
+        UserDao userDao = ChatDatabase.getInstance(this).getUserDao();
+        UserRepository userRepository = new UserRepository(userDao);
+
+        UserViewModel.Factory factory = new UserViewModel.Factory(getApplication(), userRepository);
+        UserViewModel userViewModel = ViewModelProviders.of(this, factory).get(UserViewModel.class);
+
         authPresenter = new AuthPresenter(this, this, userViewModel);
         authPresenter.init();
     }

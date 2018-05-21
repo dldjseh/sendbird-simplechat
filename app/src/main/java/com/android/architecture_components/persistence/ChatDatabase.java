@@ -6,9 +6,11 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
 import com.android.architecture_components.persistence.dao.MessageDao;
+import com.android.architecture_components.persistence.dao.UserDao;
 import com.android.architecture_components.persistence.entity.Message;
+import com.android.architecture_components.persistence.entity.User;
 
-@Database(entities = {Message.class}, version = 1)
+@Database(entities = {Message.class, User.class}, version = 1)
 public abstract class ChatDatabase extends RoomDatabase {
 
     private static final String DB_NAME = "repoDatabase.db";
@@ -26,4 +28,6 @@ public abstract class ChatDatabase extends RoomDatabase {
     }
 
     public abstract MessageDao getMessageDao();
+
+    public abstract UserDao getUserDao();
 }
