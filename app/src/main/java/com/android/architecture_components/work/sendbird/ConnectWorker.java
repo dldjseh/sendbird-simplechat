@@ -26,7 +26,12 @@ public class ConnectWorker extends BaseWorker {
                 }
             }
         });
-        User user = publishSubject.blockingFirst();
-        return WorkerResult.SUCCESS;
+
+        try {
+            publishSubject.blockingFirst();
+            return WorkerResult.SUCCESS;
+        } catch (Exception e) {
+            return WorkerResult.FAILURE;
+        }
     }
 }
