@@ -7,7 +7,7 @@ import com.android.architecture_components.persistence.entity.Channel;
 import com.sendbird.android.GroupChannel;
 import com.sendbird.android.GroupChannelParams;
 
-public class CreateChannelWorker extends BaseWorker<GroupChannel> {
+public class CreateGroupChannelWorker extends BaseWorker<GroupChannel> {
 
     public final static String CHANNEL_NAME = "channel_name";
 

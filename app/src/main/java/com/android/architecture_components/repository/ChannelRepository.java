@@ -6,7 +6,7 @@ import android.arch.paging.PagedList;
 
 import com.android.architecture_components.persistence.dao.ChannelDao;
 import com.android.architecture_components.persistence.entity.Channel;
-import com.android.architecture_components.work.CreateChannelWorker;
+import com.android.architecture_components.work.CreateGroupChannelWorker;
 import com.android.architecture_components.work.GetAllGroupChannelsWorker;
 
 import androidx.work.WorkStatus;
@@ -34,8 +34,8 @@ public class ChannelRepository extends Repository<ChannelDao, Channel> {
     }
 
     public LiveData<WorkStatus> create(String channelName) {
-        return enqueue(new CreateChannelWorker.Builder<CreateChannelWorker>()
-                .putData(CreateChannelWorker.CHANNEL_NAME, channelName)
-                .build(CreateChannelWorker.class));
+        return enqueue(new CreateGroupChannelWorker.Builder<CreateGroupChannelWorker>()
+                .putData(CreateGroupChannelWorker.CHANNEL_NAME, channelName)
+                .build(CreateGroupChannelWorker.class));
     }
 }
