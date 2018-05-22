@@ -10,17 +10,19 @@ import android.support.annotation.NonNull;
 import com.android.architecture_components.data.repository.MessageRepository;
 import com.android.architecture_components.persistence.entity.Message;
 
-public class MessageViewModel extends BaseViewModel<Message> {
+public class MessageViewModel extends BaseViewModel<Message, MessageRepository> {
 
     private LiveData<PagedList<Message>> messages;
 
     private MessageViewModel(@NonNull Application application, @NonNull MessageRepository messageRepository) {
-        super(application);
-        messages = messageRepository.getAllLiveData();
+        super(application, messageRepository);
     }
 
     @Override
     public LiveData<PagedList<Message>> getAllLiveData() {
+        if (messages == null) {
+            messages = repository.getAllLiveData();
+        }
         return messages;
     }
 

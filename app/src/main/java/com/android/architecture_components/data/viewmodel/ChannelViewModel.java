@@ -10,17 +10,19 @@ import android.support.annotation.NonNull;
 import com.android.architecture_components.data.repository.ChannelRepository;
 import com.android.architecture_components.persistence.entity.Channel;
 
-public class ChannelViewModel extends BaseViewModel<Channel> {
+public class ChannelViewModel extends BaseViewModel<Channel, ChannelRepository> {
 
     private LiveData<PagedList<Channel>> channels;
 
     private ChannelViewModel(@NonNull Application application, @NonNull ChannelRepository channelRepository) {
-        super(application);
-        channels = channelRepository.getAllLiveData();
+        super(application, channelRepository);
     }
 
     @Override
     public LiveData<PagedList<Channel>> getAllLiveData() {
+        if (channels == null) {
+            channels = repository.getAllLiveData();
+        }
         return channels;
     }
 

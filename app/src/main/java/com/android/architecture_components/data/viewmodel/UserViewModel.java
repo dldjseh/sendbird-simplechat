@@ -10,13 +10,12 @@ import android.support.annotation.NonNull;
 import com.android.architecture_components.data.repository.UserRepository;
 import com.android.architecture_components.persistence.entity.User;
 
-public class UserViewModel extends BaseViewModel<User> {
+public class UserViewModel extends BaseViewModel<User, UserRepository> {
 
     private LiveData<User> user;
 
     private UserViewModel(@NonNull Application application, @NonNull UserRepository userRepository) {
-        super(application);
-        user = userRepository.getFirstLiveData();
+        super(application, userRepository);
     }
 
     @Override
@@ -26,6 +25,9 @@ public class UserViewModel extends BaseViewModel<User> {
 
     @Override
     public LiveData<User> getFirstLiveData() {
+        if (user == null) {
+            user = repository.getFirstLiveData();
+        }
         return user;
     }
 

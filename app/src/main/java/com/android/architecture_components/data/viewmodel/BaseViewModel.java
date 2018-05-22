@@ -5,12 +5,16 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.support.annotation.NonNull;
 
 import com.android.architecture_components.data.SendBirdApi;
+import com.android.architecture_components.data.repository.BaseRepository;
 import com.android.architecture_components.persistence.entity.SendBirdObject;
 
-public abstract class BaseViewModel<OBJ extends SendBirdObject> extends AndroidViewModel
-        implements SendBirdApi<OBJ> {
+public abstract class BaseViewModel<OBJ extends SendBirdObject, REPO extends BaseRepository>
+        extends AndroidViewModel implements SendBirdApi<OBJ> {
 
-    BaseViewModel(@NonNull Application application) {
+    protected REPO repository;
+
+    BaseViewModel(@NonNull Application application, @NonNull REPO repository) {
         super(application);
+        this.repository = repository;
     }
 }
