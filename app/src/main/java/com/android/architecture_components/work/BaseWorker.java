@@ -4,11 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.google.common.collect.Maps;
-import com.sendbird.android.OpenChannel;
-import com.sendbird.android.SendBirdException;
-import com.sendbird.android.User;
 
-import java.util.List;
 import java.util.Map;
 
 import androidx.work.Data;
@@ -64,76 +60,35 @@ public abstract class BaseWorker<RESULT> extends Worker {
         }
     }
 
-    protected EkoWorkHandler workerHandler = new EkoWorkHandler() {
-
-        @Override
-        public void onConnected(User user, SendBirdException e) {
-            try {
-                handlerException((RESULT) user, e);
-            } catch (Exception e2) {
-                publishSubject.onError(e2);
-            }
+    protected final void handlerException(RESULT result, Exception e) {
+        if (e != null) {
+            publishSubject.onError(e);
+        } else {
+            Flowable.just(result)
+                    .observeOn(Schedulers.io())
+                    .doOnNext(new Consumer<RESULT>() {
+                        @Override
+                        public void accept(RESULT result) throws Exception {
+                            handleResult(result);
+                        }
+                    })
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .doOnNext(new Consumer<RESULT>() {
+                        @Override
+                        public void accept(RESULT result) throws Exception {
+                            publishSubject.onNext(result);
+                            publishSubject.onComplete();
+                        }
+                    })
+                    .doOnError(new Consumer<Throwable>() {
+                        @Override
+                        public void accept(Throwable throwable) throws Exception {
+                            publishSubject.onError(throwable);
+                        }
+                    })
+                    .subscribe();
         }
-
-        @Override
-        public void onDisconnected() {
-            handleResult();
-        }
-
-        @Override
-        public void onResult(OpenChannel openChannel, SendBirdException e) {
-            try {
-                handlerException((RESULT) openChannel, e);
-            } catch (Exception e2) {
-                publishSubject.onError(e2);
-            }
-        }
-
-        @Override
-        public void onResult(List<OpenChannel> list, SendBirdException e) {
-            try {
-                handlerException((RESULT) list, e);
-            } catch (Exception e2) {
-                publishSubject.onError(e2);
-            }
-        }
-
-        private void handlerException(RESULT result, Exception e) {
-            if (e != null) {
-                publishSubject.onError(e);
-            } else {
-                Flowable.just(result)
-                        .observeOn(Schedulers.io())
-                        .doOnNext(new Consumer<RESULT>() {
-                            @Override
-                            public void accept(RESULT result) throws Exception {
-                                handleResult(result);
-                            }
-                        })
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .doOnNext(new Consumer<RESULT>() {
-                            @Override
-                            public void accept(RESULT result) throws Exception {
-                                publishSubject.onNext(result);
-                                publishSubject.onComplete();
-                            }
-                        })
-                        .doOnError(new Consumer<Throwable>() {
-                            @Override
-                            public void accept(Throwable throwable) throws Exception {
-                                publishSubject.onError(throwable);
-                            }
-                        })
-                        .subscribe();
-            }
-        }
-    };
-
-    protected void handleResult() {
-
     }
 
-    protected void handleResult(RESULT result) {
-
-    }
+    protected abstract void handleResult(RESULT result);
 }

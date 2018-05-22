@@ -11,7 +11,7 @@ import com.android.architecture_components.ui.AuthView;
 
 import androidx.work.WorkStatus;
 
-public class AuthPresenter extends Presenter<AuthView, UserRepository, UserViewModel> {
+public class AuthPresenter extends BasePresenter<AuthView, UserRepository, UserViewModel> {
 
     public AuthPresenter(LifecycleOwner lifecycleOwner, AuthView view, UserRepository repository, UserViewModel viewModel) {
         super(lifecycleOwner, view, repository, viewModel);

@@ -8,13 +8,13 @@ import android.text.Editable;
 
 import com.android.architecture_components.data.repository.ChannelRepository;
 import com.android.architecture_components.data.viewmodel.ChannelViewModel;
-import com.android.architecture_components.handler.ChannelEvent;
+import com.android.architecture_components.event.ChannelEvent;
 import com.android.architecture_components.persistence.entity.Channel;
 import com.android.architecture_components.ui.ChannelRecyclerView;
 
 import androidx.work.WorkStatus;
 
-public class ChannelPresenter extends Presenter<ChannelRecyclerView, ChannelRepository, ChannelViewModel> {
+public class ChannelPresenter extends BasePresenter<ChannelRecyclerView, ChannelRepository, ChannelViewModel> {
 
     public ChannelPresenter(LifecycleOwner lifecycleOwner, ChannelRecyclerView view, ChannelRepository repository, ChannelViewModel viewModel) {
         super(lifecycleOwner, view, repository, viewModel);

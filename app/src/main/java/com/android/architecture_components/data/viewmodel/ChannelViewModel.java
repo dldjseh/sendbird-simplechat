@@ -10,7 +10,7 @@ import android.support.annotation.NonNull;
 import com.android.architecture_components.data.repository.ChannelRepository;
 import com.android.architecture_components.persistence.entity.Channel;
 
-public class ChannelViewModel extends SendBirdViewModel<Channel> {
+public class ChannelViewModel extends BaseViewModel<Channel> {
 
     private LiveData<PagedList<Channel>> channels;
 

@@ -12,7 +12,7 @@ import com.android.architecture_components.work.DisconnectWorker;
 
 import androidx.work.WorkStatus;
 
-public class UserRepository extends SendBirdRepository<User, UserDao> {
+public class UserRepository extends BaseRepository<User, UserDao> {
 
     public UserRepository(Context context) {
         super(ChatDatabase.getInstance(context).getUserDao());

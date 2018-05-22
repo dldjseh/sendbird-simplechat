@@ -10,7 +10,7 @@ import android.support.annotation.NonNull;
 import com.android.architecture_components.data.repository.UserRepository;
 import com.android.architecture_components.persistence.entity.User;
 
-public class UserViewModel extends SendBirdViewModel<User> {
+public class UserViewModel extends BaseViewModel<User> {
 
     private LiveData<User> user;
 

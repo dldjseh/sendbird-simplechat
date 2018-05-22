@@ -5,6 +5,8 @@ import android.support.annotation.NonNull;
 import com.android.architecture_components.persistence.ChatDatabase;
 import com.android.architecture_components.persistence.entity.Channel;
 import com.sendbird.android.OpenChannel;
+import com.sendbird.android.OpenChannelListQuery;
+import com.sendbird.android.SendBirdException;
 
 import java.util.List;
 
@@ -13,7 +15,12 @@ public class GetAllChannelsWorker extends BaseWorker<List<OpenChannel>> {
     @NonNull
     @Override
     public WorkerResult doWork() {
-        OpenChannel.createOpenChannelListQuery().next(workerHandler);
+        OpenChannel.createOpenChannelListQuery().next(new OpenChannelListQuery.OpenChannelListQueryResultHandler() {
+            @Override
+            public void onResult(List<OpenChannel> list, SendBirdException e) {
+                handlerException(list, e);
+            }
+        });
         return super.doWork();
     }
 

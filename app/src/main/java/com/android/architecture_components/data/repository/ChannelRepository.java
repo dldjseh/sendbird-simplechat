@@ -13,7 +13,7 @@ import com.android.architecture_components.work.GetAllChannelsWorker;
 
 import androidx.work.WorkStatus;
 
-public class ChannelRepository extends SendBirdRepository<Channel, ChannelDao> {
+public class ChannelRepository extends BaseRepository<Channel, ChannelDao> {
 
     public ChannelRepository(Context context) {
         super(ChatDatabase.getInstance(context).getChannelDao());

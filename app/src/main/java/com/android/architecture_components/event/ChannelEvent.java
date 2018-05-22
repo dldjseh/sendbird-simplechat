@@ -1,4 +1,4 @@
-package com.android.architecture_components.handler;
+package com.android.architecture_components.event;
 
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleObserver;

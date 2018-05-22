@@ -11,7 +11,7 @@ import com.android.architecture_components.data.viewmodel.MessageViewModel;
 import com.android.architecture_components.persistence.entity.Message;
 import com.android.architecture_components.ui.MessageRecyclerView;
 
-public class MessagePresenter extends Presenter<MessageRecyclerView, MessageRepository, MessageViewModel> {
+public class MessagePresenter extends BasePresenter<MessageRecyclerView, MessageRepository, MessageViewModel> {
 
     public MessagePresenter(LifecycleOwner lifecycleOwner, MessageRecyclerView view, MessageRepository repository, MessageViewModel viewModel) {
         super(lifecycleOwner, view, repository, viewModel);

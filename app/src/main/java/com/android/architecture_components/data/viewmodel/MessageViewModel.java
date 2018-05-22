@@ -10,7 +10,7 @@ import android.support.annotation.NonNull;
 import com.android.architecture_components.data.repository.MessageRepository;
 import com.android.architecture_components.persistence.entity.Message;
 
-public class MessageViewModel extends SendBirdViewModel<Message> {
+public class MessageViewModel extends BaseViewModel<Message> {
 
     private LiveData<PagedList<Message>> messages;
 

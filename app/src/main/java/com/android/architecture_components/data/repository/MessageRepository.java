@@ -9,7 +9,7 @@ import com.android.architecture_components.persistence.ChatDatabase;
 import com.android.architecture_components.persistence.dao.MessageDao;
 import com.android.architecture_components.persistence.entity.Message;
 
-public class MessageRepository extends SendBirdRepository<Message, MessageDao> {
+public class MessageRepository extends BaseRepository<Message, MessageDao> {
 
     public MessageRepository(Context context) {
         super(ChatDatabase.getInstance(context).getMessageDao());

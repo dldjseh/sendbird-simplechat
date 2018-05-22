@@ -10,12 +10,17 @@ public class DisconnectWorker extends BaseWorker<User> {
     @NonNull
     @Override
     public WorkerResult doWork() {
-        SendBird.disconnect(workerHandler);
+        SendBird.disconnect(new SendBird.DisconnectHandler() {
+            @Override
+            public void onDisconnected() {
+
+            }
+        });
         return super.doWork();
     }
 
     @Override
-    protected void handleResult() {
+    protected void handleResult(User user) {
 
     }
 }

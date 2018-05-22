@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import com.android.architecture_components.persistence.ChatDatabase;
 import com.android.architecture_components.persistence.entity.Channel;
 import com.sendbird.android.OpenChannel;
+import com.sendbird.android.SendBirdException;
 
 public class CreateChannelWorker extends BaseWorker<OpenChannel> {
 
@@ -13,7 +14,12 @@ public class CreateChannelWorker extends BaseWorker<OpenChannel> {
     @NonNull
     @Override
     public WorkerResult doWork() {
-        OpenChannel.createChannel(workerHandler);
+        OpenChannel.createChannel(new OpenChannel.OpenChannelCreateHandler() {
+            @Override
+            public void onResult(OpenChannel openChannel, SendBirdException e) {
+                handlerException(openChannel, e);
+            }
+        });
         return super.doWork();
     }
 

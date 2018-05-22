@@ -2,7 +2,7 @@ package com.android.architecture_components.work;
 
 import androidx.work.WorkManager;
 
-public class EkoWorkManager {
+public class SendBirdWorkManager {
 
     private static WorkManager workManager;
 
