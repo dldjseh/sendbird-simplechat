@@ -1,7 +1,9 @@
 package com.android.architecture_components.repository;
 
 import android.arch.lifecycle.LiveData;
+import android.content.Context;
 
+import com.android.architecture_components.persistence.ChatDatabase;
 import com.android.architecture_components.persistence.dao.UserDao;
 import com.android.architecture_components.persistence.entity.User;
 import com.android.architecture_components.work.ConnectWorker;
@@ -9,14 +11,14 @@ import com.android.architecture_components.work.DisconnectWorker;
 
 import androidx.work.WorkStatus;
 
-public class UserRepository extends Repository<UserDao, User> {
+public class UserRepository extends Repository<User, UserDao> {
 
-    public UserRepository(UserDao userDao) {
-        super(userDao);
+    public UserRepository(Context context) {
+        super(ChatDatabase.getInstance(context).getUserDao());
     }
 
     @Override
-    public LiveData<User> getFirst() {
+    public LiveData<User> getFirstLiveData() {
         return dao.getFirst();
     }
 

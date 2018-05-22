@@ -11,6 +11,7 @@ import android.widget.EditText;
 import com.android.architecture_components.R;
 import com.android.architecture_components.persistence.entity.Message;
 import com.android.architecture_components.presenter.MessagePresenter;
+import com.android.architecture_components.repository.MessageRepository;
 import com.android.architecture_components.ui.adapter.MessageAdapter;
 import com.android.architecture_components.ui.adapter.MessageItemCallback;
 import com.android.architecture_components.viewmodel.MessageViewModel;
@@ -34,10 +35,11 @@ public class MessageActivity extends BaseActivity implements MessageRecyclerView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
 
-        MessageViewModel.Factory factory = new MessageViewModel.Factory(getApplication());
-        MessageViewModel messageViewModel = ViewModelProviders.of(this, factory).get(MessageViewModel.class);
+        MessageRepository repository = new MessageRepository(this);
+        MessageViewModel.Factory factory = new MessageViewModel.Factory(getApplication(), repository);
+        MessageViewModel viewModel = ViewModelProviders.of(this, factory).get(MessageViewModel.class);
 
-        messagePresenter = new MessagePresenter(this, this, messageViewModel);
+        messagePresenter = new MessagePresenter(this, this, repository, viewModel);
 
         messageAdapter = new MessageAdapter(new MessageItemCallback());
 

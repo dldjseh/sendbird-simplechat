@@ -5,28 +5,24 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
-import com.android.architecture_components.persistence.ChatDatabase;
 import com.android.architecture_components.persistence.entity.User;
 import com.android.architecture_components.repository.UserRepository;
 
-import androidx.work.WorkStatus;
-
-public class UserViewModel extends BaseAndroidViewModel<UserRepository> {
+public class UserViewModel extends BaseAndroidViewModel<User> {
 
     private LiveData<User> user;
 
     private UserViewModel(@NonNull Application application, @NonNull UserRepository userRepository) {
-        super(application, userRepository);
-        user = userRepository.getFirst();
+        super(application);
+        user = userRepository.getFirstLiveData();
     }
 
-    public LiveData<User> getUser() {
+    @Nullable
+    @Override
+    public LiveData<User> getFirstLiveData() {
         return user;
-    }
-
-    public LiveData<WorkStatus> connect() {
-        return repository.connect();
     }
 
     public static class Factory extends ViewModelProvider.NewInstanceFactory {
@@ -37,9 +33,9 @@ public class UserViewModel extends BaseAndroidViewModel<UserRepository> {
         @NonNull
         private UserRepository repository;
 
-        public Factory(@NonNull Application application) {
+        public Factory(@NonNull Application application, @NonNull UserRepository repository) {
             this.application = application;
-            this.repository = new UserRepository(ChatDatabase.getInstance(application).getUserDao());
+            this.repository = repository;
         }
 
         @NonNull

@@ -6,21 +6,23 @@ import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.paging.PagedList;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
-import com.android.architecture_components.persistence.ChatDatabase;
 import com.android.architecture_components.persistence.entity.Message;
 import com.android.architecture_components.repository.MessageRepository;
 
-public class MessageViewModel extends BaseAndroidViewModel<MessageRepository> {
+public class MessageViewModel extends BaseAndroidViewModel<Message> {
 
     private LiveData<PagedList<Message>> messages;
 
     private MessageViewModel(@NonNull Application application, @NonNull MessageRepository messageRepository) {
-        super(application, messageRepository);
-        messages = messageRepository.getAll();
+        super(application);
+        messages = messageRepository.getAllLiveData();
     }
 
-    public LiveData<PagedList<Message>> getMessages() {
+    @Nullable
+    @Override
+    public LiveData<PagedList<Message>> getAllLiveData() {
         return messages;
     }
 
@@ -36,9 +38,9 @@ public class MessageViewModel extends BaseAndroidViewModel<MessageRepository> {
         @NonNull
         private MessageRepository repository;
 
-        public Factory(@NonNull Application application) {
+        public Factory(@NonNull Application application, @NonNull MessageRepository repository) {
             this.application = application;
-            this.repository = new MessageRepository(ChatDatabase.getInstance(application).getMessageDao());
+            this.repository = repository;
         }
 
         @NonNull

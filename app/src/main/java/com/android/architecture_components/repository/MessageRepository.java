@@ -3,18 +3,20 @@ package com.android.architecture_components.repository;
 import android.arch.lifecycle.LiveData;
 import android.arch.paging.LivePagedListBuilder;
 import android.arch.paging.PagedList;
+import android.content.Context;
 
+import com.android.architecture_components.persistence.ChatDatabase;
 import com.android.architecture_components.persistence.dao.MessageDao;
 import com.android.architecture_components.persistence.entity.Message;
 
-public class MessageRepository extends Repository<MessageDao, Message> {
+public class MessageRepository extends Repository<Message, MessageDao> {
 
-    public MessageRepository(MessageDao messageDao) {
-        super(messageDao);
+    public MessageRepository(Context context) {
+        super(ChatDatabase.getInstance(context).getMessageDao());
     }
 
     @Override
-    public LiveData<PagedList<Message>> getAll() {
+    public LiveData<PagedList<Message>> getAllLiveData() {
         PagedList.Config config = new PagedList.Config.Builder()
                 .setInitialLoadSizeHint(10)
                 .setPageSize(10)

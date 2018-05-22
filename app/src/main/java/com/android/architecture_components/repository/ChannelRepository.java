@@ -3,7 +3,9 @@ package com.android.architecture_components.repository;
 import android.arch.lifecycle.LiveData;
 import android.arch.paging.LivePagedListBuilder;
 import android.arch.paging.PagedList;
+import android.content.Context;
 
+import com.android.architecture_components.persistence.ChatDatabase;
 import com.android.architecture_components.persistence.dao.ChannelDao;
 import com.android.architecture_components.persistence.entity.Channel;
 import com.android.architecture_components.work.CreateChannelWorker;
@@ -11,14 +13,14 @@ import com.android.architecture_components.work.GetAllChannelsWorker;
 
 import androidx.work.WorkStatus;
 
-public class ChannelRepository extends Repository<ChannelDao, Channel> {
+public class ChannelRepository extends Repository<Channel, ChannelDao> {
 
-    public ChannelRepository(ChannelDao channelDao) {
-        super(channelDao);
+    public ChannelRepository(Context context) {
+        super(ChatDatabase.getInstance(context).getChannelDao());
     }
 
     @Override
-    public LiveData<PagedList<Channel>> getAll() {
+    public LiveData<PagedList<Channel>> getAllLiveData() {
         PagedList.Config config = new PagedList.Config.Builder()
                 .setInitialLoadSizeHint(10)
                 .setPageSize(10)
@@ -28,7 +30,7 @@ public class ChannelRepository extends Repository<ChannelDao, Channel> {
         return new LivePagedListBuilder<>(dao.getAll(), config).build();
     }
 
-    public LiveData<WorkStatus> getAllFromNetwork() {
+    public LiveData<WorkStatus> getAllNetworkData() {
         return enqueue(new GetAllChannelsWorker.Builder<GetAllChannelsWorker>()
                 .build(GetAllChannelsWorker.class));
     }

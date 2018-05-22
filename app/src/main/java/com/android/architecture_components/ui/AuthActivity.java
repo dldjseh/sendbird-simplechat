@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.android.architecture_components.R;
 import com.android.architecture_components.persistence.entity.User;
 import com.android.architecture_components.presenter.AuthPresenter;
+import com.android.architecture_components.repository.UserRepository;
 import com.android.architecture_components.ui.intent.ChannelIntent;
 import com.android.architecture_components.viewmodel.UserViewModel;
 
@@ -20,10 +21,11 @@ public class AuthActivity extends BaseActivity implements AuthView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth);
 
-        UserViewModel.Factory factory = new UserViewModel.Factory(getApplication());
-        UserViewModel userViewModel = ViewModelProviders.of(this, factory).get(UserViewModel.class);
+        UserRepository repository = new UserRepository(this);
+        UserViewModel.Factory factory = new UserViewModel.Factory(getApplication(), repository);
+        UserViewModel viewModel = ViewModelProviders.of(this, factory).get(UserViewModel.class);
 
-        authPresenter = new AuthPresenter(this, this, userViewModel);
+        authPresenter = new AuthPresenter(this, this, repository, viewModel);
     }
 
     @Override

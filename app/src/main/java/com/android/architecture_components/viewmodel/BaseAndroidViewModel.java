@@ -2,16 +2,26 @@ package com.android.architecture_components.viewmodel;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
+import android.arch.lifecycle.LiveData;
+import android.arch.paging.PagedList;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
-import com.android.architecture_components.repository.Repository;
+import com.android.architecture_components.persistence.entity.SendBirdObject;
 
-public class BaseAndroidViewModel<REPO extends Repository> extends AndroidViewModel {
+public class BaseAndroidViewModel<OBJ extends SendBirdObject> extends AndroidViewModel {
 
-    protected REPO repository;
-
-    protected BaseAndroidViewModel(@NonNull Application application, @NonNull REPO repository) {
+    protected BaseAndroidViewModel(@NonNull Application application) {
         super(application);
-        this.repository = repository;
+    }
+
+    @Nullable
+    public LiveData<PagedList<OBJ>> getAllLiveData() {
+        return null;
+    }
+
+    @Nullable
+    public LiveData<OBJ> getFirstLiveData() {
+        return null;
     }
 }

@@ -12,6 +12,7 @@ import android.widget.EditText;
 import com.android.architecture_components.R;
 import com.android.architecture_components.persistence.entity.Channel;
 import com.android.architecture_components.presenter.ChannelPresenter;
+import com.android.architecture_components.repository.ChannelRepository;
 import com.android.architecture_components.ui.adapter.ChannelAdapter;
 import com.android.architecture_components.ui.adapter.ChannelItemCallback;
 import com.android.architecture_components.viewmodel.ChannelViewModel;
@@ -35,10 +36,11 @@ public class ChannelActivity extends BaseActivity implements ChannelRecyclerView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_channel);
 
-        ChannelViewModel.Factory factory = new ChannelViewModel.Factory(getApplication());
-        ChannelViewModel channelViewModel = ViewModelProviders.of(this, factory).get(ChannelViewModel.class);
+        ChannelRepository repository = new ChannelRepository(this);
+        ChannelViewModel.Factory factory = new ChannelViewModel.Factory(getApplication(), repository);
+        ChannelViewModel viewModel = ViewModelProviders.of(this, factory).get(ChannelViewModel.class);
 
-        channelPresenter = new ChannelPresenter(this, this, channelViewModel);
+        channelPresenter = new ChannelPresenter(this, this, repository, viewModel);
 
         channelAdapter = new ChannelAdapter(new ChannelItemCallback());
 

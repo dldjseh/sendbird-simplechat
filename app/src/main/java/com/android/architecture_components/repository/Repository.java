@@ -13,7 +13,7 @@ import java.util.UUID;
 import androidx.work.WorkRequest;
 import androidx.work.WorkStatus;
 
-public abstract class Repository<DAO extends Dao, OBJ extends SendBirdObject> {
+public abstract class Repository<OBJ extends SendBirdObject, DAO extends Dao> {
 
     protected DAO dao;
 
@@ -22,12 +22,12 @@ public abstract class Repository<DAO extends Dao, OBJ extends SendBirdObject> {
     }
 
     @Nullable
-    public LiveData<PagedList<OBJ>> getAll() {
+    public LiveData<PagedList<OBJ>> getAllLiveData() {
         return null;
     }
 
     @Nullable
-    public LiveData<OBJ> getFirst() {
+    public LiveData<OBJ> getFirstLiveData() {
         return null;
     }
 
