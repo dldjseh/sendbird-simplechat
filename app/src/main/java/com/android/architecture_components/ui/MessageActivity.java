@@ -11,10 +11,10 @@ import android.widget.EditText;
 import com.android.architecture_components.R;
 import com.android.architecture_components.persistence.entity.Message;
 import com.android.architecture_components.presenter.MessagePresenter;
-import com.android.architecture_components.repository.MessageRepository;
+import com.android.architecture_components.data.repository.MessageRepository;
 import com.android.architecture_components.ui.adapter.MessageAdapter;
 import com.android.architecture_components.ui.adapter.MessageItemCallback;
-import com.android.architecture_components.viewmodel.MessageViewModel;
+import com.android.architecture_components.data.viewmodel.MessageViewModel;
 
 import butterknife.BindView;
 import butterknife.OnClick;

@@ -1,6 +1,7 @@
-package com.android.architecture_components.repository;
+package com.android.architecture_components.data.repository;
 
 import android.arch.lifecycle.LiveData;
+import android.arch.paging.PagedList;
 import android.content.Context;
 
 import com.android.architecture_components.persistence.ChatDatabase;
@@ -11,10 +12,15 @@ import com.android.architecture_components.work.DisconnectWorker;
 
 import androidx.work.WorkStatus;
 
-public class UserRepository extends Repository<User, UserDao> {
+public class UserRepository extends SendBirdRepository<User, UserDao> {
 
     public UserRepository(Context context) {
         super(ChatDatabase.getInstance(context).getUserDao());
+    }
+
+    @Override
+    public LiveData<PagedList<User>> getAllLiveData() {
+        return null;
     }
 
     @Override

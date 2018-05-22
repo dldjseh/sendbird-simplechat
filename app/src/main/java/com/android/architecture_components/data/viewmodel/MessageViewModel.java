@@ -1,4 +1,4 @@
-package com.android.architecture_components.viewmodel;
+package com.android.architecture_components.data.viewmodel;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
@@ -6,12 +6,11 @@ import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.paging.PagedList;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
+import com.android.architecture_components.data.repository.MessageRepository;
 import com.android.architecture_components.persistence.entity.Message;
-import com.android.architecture_components.repository.MessageRepository;
 
-public class MessageViewModel extends BaseAndroidViewModel<Message> {
+public class MessageViewModel extends SendBirdViewModel<Message> {
 
     private LiveData<PagedList<Message>> messages;
 
@@ -20,10 +19,14 @@ public class MessageViewModel extends BaseAndroidViewModel<Message> {
         messages = messageRepository.getAllLiveData();
     }
 
-    @Nullable
     @Override
     public LiveData<PagedList<Message>> getAllLiveData() {
         return messages;
+    }
+
+    @Override
+    public LiveData<Message> getFirstLiveData() {
+        return null;
     }
 
     public void save(Message message) {

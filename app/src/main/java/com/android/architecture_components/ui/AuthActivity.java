@@ -8,9 +8,9 @@ import android.widget.Toast;
 import com.android.architecture_components.R;
 import com.android.architecture_components.persistence.entity.User;
 import com.android.architecture_components.presenter.AuthPresenter;
-import com.android.architecture_components.repository.UserRepository;
+import com.android.architecture_components.data.repository.UserRepository;
 import com.android.architecture_components.ui.intent.ChannelIntent;
-import com.android.architecture_components.viewmodel.UserViewModel;
+import com.android.architecture_components.data.viewmodel.UserViewModel;
 
 public class AuthActivity extends BaseActivity implements AuthView {
 

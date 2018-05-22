@@ -7,9 +7,9 @@ import android.support.annotation.Nullable;
 import android.text.Editable;
 
 import com.android.architecture_components.persistence.entity.Channel;
-import com.android.architecture_components.repository.ChannelRepository;
+import com.android.architecture_components.data.repository.ChannelRepository;
 import com.android.architecture_components.ui.ChannelRecyclerView;
-import com.android.architecture_components.viewmodel.ChannelViewModel;
+import com.android.architecture_components.data.viewmodel.ChannelViewModel;
 
 import androidx.work.WorkStatus;
 

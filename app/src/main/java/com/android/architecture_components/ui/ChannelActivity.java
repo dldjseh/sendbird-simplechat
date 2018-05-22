@@ -12,10 +12,10 @@ import android.widget.EditText;
 import com.android.architecture_components.R;
 import com.android.architecture_components.persistence.entity.Channel;
 import com.android.architecture_components.presenter.ChannelPresenter;
-import com.android.architecture_components.repository.ChannelRepository;
+import com.android.architecture_components.data.repository.ChannelRepository;
 import com.android.architecture_components.ui.adapter.ChannelAdapter;
 import com.android.architecture_components.ui.adapter.ChannelItemCallback;
-import com.android.architecture_components.viewmodel.ChannelViewModel;
+import com.android.architecture_components.data.viewmodel.ChannelViewModel;
 
 import butterknife.BindView;
 import butterknife.OnClick;

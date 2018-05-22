@@ -1,16 +1,16 @@
-package com.android.architecture_components.viewmodel;
+package com.android.architecture_components.data.viewmodel;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
+import android.arch.paging.PagedList;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
+import com.android.architecture_components.data.repository.UserRepository;
 import com.android.architecture_components.persistence.entity.User;
-import com.android.architecture_components.repository.UserRepository;
 
-public class UserViewModel extends BaseAndroidViewModel<User> {
+public class UserViewModel extends SendBirdViewModel<User> {
 
     private LiveData<User> user;
 
@@ -19,7 +19,11 @@ public class UserViewModel extends BaseAndroidViewModel<User> {
         user = userRepository.getFirstLiveData();
     }
 
-    @Nullable
+    @Override
+    public LiveData<PagedList<User>> getAllLiveData() {
+        return null;
+    }
+
     @Override
     public LiveData<User> getFirstLiveData() {
         return user;

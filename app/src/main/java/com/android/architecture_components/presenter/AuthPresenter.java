@@ -5,9 +5,9 @@ import android.arch.lifecycle.Observer;
 import android.support.annotation.Nullable;
 
 import com.android.architecture_components.persistence.entity.User;
-import com.android.architecture_components.repository.UserRepository;
+import com.android.architecture_components.data.repository.UserRepository;
 import com.android.architecture_components.ui.AuthView;
-import com.android.architecture_components.viewmodel.UserViewModel;
+import com.android.architecture_components.data.viewmodel.UserViewModel;
 
 import androidx.work.WorkStatus;
 

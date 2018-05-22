@@ -3,10 +3,10 @@ package com.android.architecture_components.presenter;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LifecycleOwner;
 
-import com.android.architecture_components.repository.Repository;
+import com.android.architecture_components.data.repository.SendBirdRepository;
 import com.android.architecture_components.ui.BaseView;
 
-public abstract class Presenter<V extends BaseView, REPO extends Repository, AVM extends AndroidViewModel> {
+public abstract class Presenter<V extends BaseView, REPO extends SendBirdRepository, AVM extends AndroidViewModel> {
 
     protected final LifecycleOwner lifecycleOwner;
     protected final V view;

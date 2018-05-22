@@ -7,9 +7,9 @@ import android.support.annotation.Nullable;
 import android.text.Editable;
 
 import com.android.architecture_components.persistence.entity.Message;
-import com.android.architecture_components.repository.MessageRepository;
+import com.android.architecture_components.data.repository.MessageRepository;
 import com.android.architecture_components.ui.MessageRecyclerView;
-import com.android.architecture_components.viewmodel.MessageViewModel;
+import com.android.architecture_components.data.viewmodel.MessageViewModel;
 
 public class MessagePresenter extends Presenter<MessageRecyclerView, MessageRepository, MessageViewModel> {
 

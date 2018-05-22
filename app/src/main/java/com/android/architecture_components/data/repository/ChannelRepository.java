@@ -1,4 +1,4 @@
-package com.android.architecture_components.repository;
+package com.android.architecture_components.data.repository;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.paging.LivePagedListBuilder;
@@ -13,7 +13,7 @@ import com.android.architecture_components.work.GetAllChannelsWorker;
 
 import androidx.work.WorkStatus;
 
-public class ChannelRepository extends Repository<Channel, ChannelDao> {
+public class ChannelRepository extends SendBirdRepository<Channel, ChannelDao> {
 
     public ChannelRepository(Context context) {
         super(ChatDatabase.getInstance(context).getChannelDao());
@@ -28,6 +28,11 @@ public class ChannelRepository extends Repository<Channel, ChannelDao> {
                 .build();
 
         return new LivePagedListBuilder<>(dao.getAll(), config).build();
+    }
+
+    @Override
+    public LiveData<Channel> getFirstLiveData() {
+        return null;
     }
 
     public LiveData<WorkStatus> getAllNetworkData() {
