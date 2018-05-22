@@ -7,8 +7,8 @@ import android.content.Context;
 import com.android.architecture_components.persistence.ChatDatabase;
 import com.android.architecture_components.persistence.dao.UserDao;
 import com.android.architecture_components.persistence.entity.User;
-import com.android.architecture_components.work.ConnectWorker;
-import com.android.architecture_components.work.DisconnectWorker;
+import com.android.architecture_components.worker.ConnectWorker;
+import com.android.architecture_components.worker.DisconnectWorker;
 
 import androidx.work.WorkStatus;
 

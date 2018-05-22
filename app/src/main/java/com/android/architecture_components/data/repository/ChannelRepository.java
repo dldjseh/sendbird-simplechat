@@ -8,8 +8,8 @@ import android.content.Context;
 import com.android.architecture_components.persistence.ChatDatabase;
 import com.android.architecture_components.persistence.dao.ChannelDao;
 import com.android.architecture_components.persistence.entity.Channel;
-import com.android.architecture_components.work.CreateChannelWorker;
-import com.android.architecture_components.work.GetAllChannelsWorker;
+import com.android.architecture_components.worker.CreateChannelWorker;
+import com.android.architecture_components.worker.GetAllChannelsWorker;
 
 import androidx.work.WorkStatus;
 

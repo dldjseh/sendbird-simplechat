@@ -1,4 +1,4 @@
-package com.android.architecture_components.work;
+package com.android.architecture_components.worker;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;

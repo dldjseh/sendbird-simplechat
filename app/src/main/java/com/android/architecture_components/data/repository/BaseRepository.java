@@ -5,7 +5,7 @@ import android.arch.lifecycle.LiveData;
 import com.android.architecture_components.data.SendBirdApi;
 import com.android.architecture_components.persistence.dao.Dao;
 import com.android.architecture_components.persistence.entity.SendBirdObject;
-import com.android.architecture_components.work.SendBirdWorkManager;
+import com.android.architecture_components.worker.SendBirdWorkManager;
 
 import java.util.UUID;
 
