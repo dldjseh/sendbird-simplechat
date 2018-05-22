@@ -6,10 +6,10 @@ import android.arch.paging.PagedList;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 
-import com.android.architecture_components.persistence.entity.Message;
 import com.android.architecture_components.data.repository.MessageRepository;
-import com.android.architecture_components.ui.MessageRecyclerView;
 import com.android.architecture_components.data.viewmodel.MessageViewModel;
+import com.android.architecture_components.persistence.entity.Message;
+import com.android.architecture_components.ui.MessageRecyclerView;
 
 public class MessagePresenter extends Presenter<MessageRecyclerView, MessageRepository, MessageViewModel> {
 
@@ -25,6 +25,11 @@ public class MessagePresenter extends Presenter<MessageRecyclerView, MessageRepo
                 view.submitList(messages);
             }
         });
+    }
+
+    @Override
+    protected void registerChannelEvent() {
+
     }
 
     public void onSendClicked(Editable editable) {

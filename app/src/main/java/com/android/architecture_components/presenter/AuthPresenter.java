@@ -4,10 +4,10 @@ import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.Observer;
 import android.support.annotation.Nullable;
 
-import com.android.architecture_components.persistence.entity.User;
 import com.android.architecture_components.data.repository.UserRepository;
-import com.android.architecture_components.ui.AuthView;
 import com.android.architecture_components.data.viewmodel.UserViewModel;
+import com.android.architecture_components.persistence.entity.User;
+import com.android.architecture_components.ui.AuthView;
 
 import androidx.work.WorkStatus;
 
@@ -35,5 +35,10 @@ public class AuthPresenter extends Presenter<AuthView, UserRepository, UserViewM
 
             }
         });
+    }
+
+    @Override
+    protected void registerChannelEvent() {
+
     }
 }

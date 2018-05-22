@@ -19,7 +19,10 @@ public abstract class Presenter<V extends BaseView, REPO extends SendBirdReposit
         this.repository = repository;
         this.androidViewModel = androidViewModel;
         init();
+        registerChannelEvent();
     }
 
     abstract protected void init();
+
+    abstract protected void registerChannelEvent();
 }

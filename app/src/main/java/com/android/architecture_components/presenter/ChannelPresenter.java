@@ -6,10 +6,11 @@ import android.arch.paging.PagedList;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 
-import com.android.architecture_components.persistence.entity.Channel;
 import com.android.architecture_components.data.repository.ChannelRepository;
-import com.android.architecture_components.ui.ChannelRecyclerView;
 import com.android.architecture_components.data.viewmodel.ChannelViewModel;
+import com.android.architecture_components.handler.ChannelEvent;
+import com.android.architecture_components.persistence.entity.Channel;
+import com.android.architecture_components.ui.ChannelRecyclerView;
 
 import androidx.work.WorkStatus;
 
@@ -36,6 +37,11 @@ public class ChannelPresenter extends Presenter<ChannelRecyclerView, ChannelRepo
         });
 
         view.displayLoggedInSnackbar();
+    }
+
+    @Override
+    protected void registerChannelEvent() {
+        lifecycleOwner.getLifecycle().addObserver(new ChannelEvent());
     }
 
     public void onCreateChannelClicked(Editable editable) {
