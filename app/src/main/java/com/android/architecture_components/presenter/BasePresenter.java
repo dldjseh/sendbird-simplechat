@@ -8,12 +8,12 @@ import com.android.architecture_components.ui.BaseView;
 
 public abstract class BasePresenter<V extends BaseView, REPO extends BaseRepository, AVM extends AndroidViewModel> {
 
-    protected final LifecycleOwner lifecycleOwner;
-    protected final V view;
-    protected final REPO repository;
-    protected final AVM androidViewModel;
+    final LifecycleOwner lifecycleOwner;
+    final V view;
+    final REPO repository;
+    final AVM androidViewModel;
 
-    protected BasePresenter(LifecycleOwner lifecycleOwner, V view, REPO repository, AVM androidViewModel) {
+    BasePresenter(LifecycleOwner lifecycleOwner, V view, REPO repository, AVM androidViewModel) {
         this.lifecycleOwner = lifecycleOwner;
         this.view = view;
         this.repository = repository;
