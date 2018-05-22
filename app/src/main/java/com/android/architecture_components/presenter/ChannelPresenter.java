@@ -8,7 +8,6 @@ import android.text.Editable;
 
 import com.android.architecture_components.data.repository.ChannelRepository;
 import com.android.architecture_components.data.viewmodel.ChannelViewModel;
-import com.android.architecture_components.event.ChannelEvent;
 import com.android.architecture_components.persistence.entity.Channel;
 import com.android.architecture_components.ui.ChannelRecyclerView;
 
@@ -41,7 +40,7 @@ public class ChannelPresenter extends BasePresenter<ChannelRecyclerView, Channel
 
     @Override
     protected void registerChannelEvent() {
-        lifecycleOwner.getLifecycle().addObserver(new ChannelEvent());
+
     }
 
     public void onCreateChannelClicked(Editable editable) {

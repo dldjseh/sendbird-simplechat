@@ -23,7 +23,7 @@ public class AuthPresenter extends BasePresenter<AuthView, UserRepository, UserV
             @Override
             public void onChanged(@Nullable User user) {
                 // FIXME: 5/21/18 apply filter operation.
-                if (user != null && user.isActive()) {
+                if (user != null) {
                     view.submitUser(user);
                 }
             }

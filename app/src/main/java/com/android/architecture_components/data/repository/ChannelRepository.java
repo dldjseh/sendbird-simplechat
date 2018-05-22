@@ -9,7 +9,7 @@ import com.android.architecture_components.persistence.ChatDatabase;
 import com.android.architecture_components.persistence.dao.ChannelDao;
 import com.android.architecture_components.persistence.entity.Channel;
 import com.android.architecture_components.worker.CreateChannelWorker;
-import com.android.architecture_components.worker.GetAllChannelsWorker;
+import com.android.architecture_components.worker.GetAndJoinAllChannelsWorker;
 
 import androidx.work.WorkStatus;
 
@@ -36,8 +36,8 @@ public class ChannelRepository extends BaseRepository<Channel, ChannelDao> {
     }
 
     public LiveData<WorkStatus> getAllNetworkData() {
-        return enqueue(new GetAllChannelsWorker.Builder<GetAllChannelsWorker>()
-                .build(GetAllChannelsWorker.class));
+        return enqueue(new GetAndJoinAllChannelsWorker.Builder<GetAndJoinAllChannelsWorker>()
+                .build(GetAndJoinAllChannelsWorker.class));
     }
 
     public LiveData<WorkStatus> create(String channelName) {

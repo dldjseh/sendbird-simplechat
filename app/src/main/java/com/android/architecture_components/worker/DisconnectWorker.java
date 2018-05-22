@@ -13,14 +13,14 @@ public class DisconnectWorker extends BaseWorker<User> {
         SendBird.disconnect(new SendBird.DisconnectHandler() {
             @Override
             public void onDisconnected() {
-
+                handleResult();
             }
         });
         return super.doWork();
     }
 
     @Override
-    protected void handleResult(User user) {
+    protected void handleResult() {
 
     }
 }
