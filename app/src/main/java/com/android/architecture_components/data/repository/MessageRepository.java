@@ -4,10 +4,11 @@ import android.arch.lifecycle.LiveData;
 import android.arch.paging.LivePagedListBuilder;
 import android.arch.paging.PagedList;
 
+import com.android.architecture_components.data.event.MessageLiveEvent;
 import com.android.architecture_components.persistence.dao.MessageDao;
 import com.android.architecture_components.persistence.entity.Message;
 
-public class MessageRepository extends BaseRepository<Message, MessageDao> {
+public class MessageRepository extends BaseRepository<Message, MessageDao, MessageLiveEvent> {
 
     public MessageRepository(MessageDao dao) {
         super(dao);
@@ -27,5 +28,10 @@ public class MessageRepository extends BaseRepository<Message, MessageDao> {
     @Override
     public LiveData<Message> getFirstLiveData() {
         return null;
+    }
+
+    @Override
+    public MessageLiveEvent getLiveEvent() {
+        return MessageLiveEvent.create();
     }
 }

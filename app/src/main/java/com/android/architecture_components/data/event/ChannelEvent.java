@@ -1,4 +1,4 @@
-package com.android.architecture_components.data;
+package com.android.architecture_components.data.event;
 
 public enum ChannelEvent {
 

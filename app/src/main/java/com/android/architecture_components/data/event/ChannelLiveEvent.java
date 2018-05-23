@@ -1,4 +1,4 @@
-package com.android.architecture_components.data;
+package com.android.architecture_components.data.event;
 
 import android.arch.lifecycle.MutableLiveData;
 
@@ -6,7 +6,7 @@ import com.sendbird.android.BaseChannel;
 import com.sendbird.android.BaseMessage;
 import com.sendbird.android.SendBird;
 
-public class ChannelLiveEvent extends MutableLiveData<ChannelEvent> {
+public class ChannelLiveEvent extends LiveEvent<ChannelEvent> {
 
     private final String TAG = getClass().getSimpleName();
 

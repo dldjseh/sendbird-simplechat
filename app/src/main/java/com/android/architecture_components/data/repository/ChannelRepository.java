@@ -4,7 +4,7 @@ import android.arch.lifecycle.LiveData;
 import android.arch.paging.LivePagedListBuilder;
 import android.arch.paging.PagedList;
 
-import com.android.architecture_components.data.ChannelLiveEvent;
+import com.android.architecture_components.data.event.ChannelLiveEvent;
 import com.android.architecture_components.persistence.dao.ChannelDao;
 import com.android.architecture_components.persistence.entity.Channel;
 import com.android.architecture_components.worker.CreateChannelWorker;
@@ -12,7 +12,7 @@ import com.android.architecture_components.worker.GetAndJoinAllChannelsWorker;
 
 import androidx.work.WorkStatus;
 
-public class ChannelRepository extends BaseRepository<Channel, ChannelDao> {
+public class ChannelRepository extends BaseRepository<Channel, ChannelDao, ChannelLiveEvent> {
 
     public ChannelRepository(ChannelDao dao) {
         super(dao);
@@ -34,6 +34,11 @@ public class ChannelRepository extends BaseRepository<Channel, ChannelDao> {
         return null;
     }
 
+    @Override
+    public ChannelLiveEvent getLiveEvent() {
+        return ChannelLiveEvent.create();
+    }
+
     public LiveData<WorkStatus> getAllNetworkData() {
         return enqueue(new GetAndJoinAllChannelsWorker.Builder<GetAndJoinAllChannelsWorker>()
                 .build(GetAndJoinAllChannelsWorker.class));
@@ -43,9 +48,5 @@ public class ChannelRepository extends BaseRepository<Channel, ChannelDao> {
         return enqueue(new CreateChannelWorker.Builder<CreateChannelWorker>()
                 .putString(CreateChannelWorker.CHANNEL_NAME, channelName)
                 .build(CreateChannelWorker.class));
-    }
-
-    public ChannelLiveEvent registerChannelEvent() {
-        return ChannelLiveEvent.create();
     }
 }

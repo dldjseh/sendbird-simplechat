@@ -19,10 +19,7 @@ public abstract class BasePresenter<V extends BaseView, REPO extends BaseReposit
         this.repository = repository;
         this.androidViewModel = androidViewModel;
         observeLiveData();
-        observeLiveEvent();
     }
 
     abstract protected void observeLiveData();
-
-    abstract protected void observeLiveEvent();
 }

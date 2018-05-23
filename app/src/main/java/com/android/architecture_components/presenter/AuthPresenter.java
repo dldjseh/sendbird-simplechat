@@ -36,9 +36,4 @@ public class AuthPresenter extends BasePresenter<AuthView, UserRepository, UserV
             }
         });
     }
-
-    @Override
-    protected void observeLiveEvent() {
-
-    }
 }

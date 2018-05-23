@@ -27,11 +27,6 @@ public class MessagePresenter extends BasePresenter<MessageRecyclerView, Message
         });
     }
 
-    @Override
-    protected void observeLiveEvent() {
-
-    }
-
     public void onSendClicked(Editable editable) {
         androidViewModel.save(new Message(""));
     }
