@@ -4,16 +4,12 @@ import androidx.work.WorkManager;
 
 public class SendBirdWorkManager {
 
-    private static WorkManager workManager;
+    private static volatile WorkManager workManager;
 
-    public static WorkManager getInstance() {
-        create();
-        return workManager;
-    }
-
-    private static void create() {
+    public static synchronized WorkManager getInstance() {
         if (workManager == null) {
             workManager = WorkManager.getInstance();
         }
+        return workManager;
     }
 }

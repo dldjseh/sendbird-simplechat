@@ -15,7 +15,7 @@ import com.android.architecture_components.persistence.entity.User;
 @Database(entities = {Message.class, User.class, Channel.class}, version = 1)
 public abstract class ChatDatabase extends RoomDatabase {
 
-    private static final String DB_NAME = "repoDatabase.db";
+    private static final String DB_NAME = "send_bird.db";
     private static volatile ChatDatabase instance;
 
     public static synchronized ChatDatabase getInstance(Context context) {
