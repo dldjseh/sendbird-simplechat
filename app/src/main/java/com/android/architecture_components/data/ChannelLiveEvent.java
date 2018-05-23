@@ -2,21 +2,27 @@ package com.android.architecture_components.data;
 
 import android.arch.lifecycle.MutableLiveData;
 
-import com.android.architecture_components.persistence.dao.ChannelDao;
-import com.android.architecture_components.persistence.entity.Channel;
 import com.sendbird.android.BaseChannel;
 import com.sendbird.android.BaseMessage;
-import com.sendbird.android.OpenChannel;
 import com.sendbird.android.SendBird;
 
-public class ChannelEventLiveData extends MutableLiveData<ChannelEvent> {
+public class ChannelLiveEvent extends MutableLiveData<ChannelEvent> {
 
     private final String TAG = getClass().getSimpleName();
 
-    private final ChannelDao dao;
+    private final MutableLiveData<BaseChannel> channelChangedLiveEvent = new MutableLiveData<>();
+    private final MutableLiveData<String> channelDeletedLiveEvent = new MutableLiveData<>();
 
-    private ChannelEventLiveData(ChannelDao dao) {
-        this.dao = dao;
+    private ChannelLiveEvent() {
+
+    }
+
+    public MutableLiveData<BaseChannel> getChannelChangedLiveEvent() {
+        return channelChangedLiveEvent;
+    }
+
+    public MutableLiveData<String> getChannelDeletedLiveEvent() {
+        return channelDeletedLiveEvent;
     }
 
     @Override
@@ -29,14 +35,14 @@ public class ChannelEventLiveData extends MutableLiveData<ChannelEvent> {
 
             @Override
             public void onChannelChanged(BaseChannel channel) {
-                dao.save(Channel.create((OpenChannel) channel));
-                postValue(ChannelEvent.CHANNEL_CHANGED);
+                channelChangedLiveEvent.setValue(channel);
+                setValue(ChannelEvent.CHANNEL_CHANGED);
             }
 
             @Override
             public void onChannelDeleted(String channelUrl, BaseChannel.ChannelType channelType) {
-                dao.delete(channelUrl);
-                postValue(ChannelEvent.CHANNEL_DELETED);
+                channelDeletedLiveEvent.setValue(channelUrl);
+                setValue(ChannelEvent.CHANNEL_DELETED);
             }
         });
     }
@@ -46,7 +52,7 @@ public class ChannelEventLiveData extends MutableLiveData<ChannelEvent> {
         SendBird.removeChannelHandler(TAG);
     }
 
-    public static ChannelEventLiveData create(ChannelDao dao) {
-        return new ChannelEventLiveData(dao);
+    public static ChannelLiveEvent create() {
+        return new ChannelLiveEvent();
     }
 }

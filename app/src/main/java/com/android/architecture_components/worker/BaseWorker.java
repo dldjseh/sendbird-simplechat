@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 
 import com.google.common.collect.Maps;
 
-import java.util.Map;
+import java.util.HashMap;
 
 import androidx.work.Data;
 import androidx.work.OneTimeWorkRequest;
@@ -44,23 +44,25 @@ public abstract class BaseWorker<RESULT> extends Worker {
 
     public static class Builder<WORKER extends BaseWorker> {
 
-        private final Map<String, Object> data = Maps.newHashMap();
+        private final HashMap<String, String> data = Maps.newHashMap();
 
-        public Builder<WORKER> putData(String key, Object value) {
+        public Builder<WORKER> putString(String key, String value) {
             data.put(key, value);
             return this;
         }
 
         public WorkRequest build(Class<WORKER> clazz) {
             Data.Builder dataBuilder = new Data.Builder();
-            dataBuilder.putAll(data);
+            for (String key : data.keySet()) {
+                dataBuilder.putString(key, data.get(key));
+            }
             return new OneTimeWorkRequest.Builder(clazz)
                     .setInputData(dataBuilder.build())
                     .build();
         }
     }
 
-    protected final void handlerException(RESULT result, Exception e) {
+    final void handlerException(RESULT result, Exception e) {
         if (e != null) {
             publishSubject.onError(e);
         } else {

@@ -12,6 +12,7 @@ import com.android.architecture_components.data.viewmodel.ChannelViewModel;
 import com.android.architecture_components.persistence.dao.ChannelDao;
 import com.android.architecture_components.persistence.entity.Channel;
 import com.android.architecture_components.ui.ChannelRecyclerView;
+import com.sendbird.android.BaseChannel;
 
 import androidx.work.WorkStatus;
 
@@ -48,6 +49,22 @@ public class ChannelPresenter extends BasePresenter<ChannelRecyclerView, Channel
 
             }
         });
+
+        repository.registerChannelEvent().getChannelChangedLiveEvent()
+                .observe(lifecycleOwner, new Observer<BaseChannel>() {
+                    @Override
+                    public void onChanged(@Nullable BaseChannel baseChannel) {
+
+                    }
+                });
+
+        repository.registerChannelEvent().getChannelDeletedLiveEvent()
+                .observe(lifecycleOwner, new Observer<String>() {
+                    @Override
+                    public void onChanged(@Nullable String channelId) {
+
+                    }
+                });
     }
 
     public void onCreateChannelClicked(Editable editable) {

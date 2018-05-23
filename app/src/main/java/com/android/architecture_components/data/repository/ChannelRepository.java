@@ -4,8 +4,7 @@ import android.arch.lifecycle.LiveData;
 import android.arch.paging.LivePagedListBuilder;
 import android.arch.paging.PagedList;
 
-import com.android.architecture_components.data.ChannelEvent;
-import com.android.architecture_components.data.ChannelEventLiveData;
+import com.android.architecture_components.data.ChannelLiveEvent;
 import com.android.architecture_components.persistence.dao.ChannelDao;
 import com.android.architecture_components.persistence.entity.Channel;
 import com.android.architecture_components.worker.CreateChannelWorker;
@@ -42,11 +41,11 @@ public class ChannelRepository extends BaseRepository<Channel, ChannelDao> {
 
     public LiveData<WorkStatus> create(String channelName) {
         return enqueue(new CreateChannelWorker.Builder<CreateChannelWorker>()
-                .putData(CreateChannelWorker.CHANNEL_NAME, channelName)
+                .putString(CreateChannelWorker.CHANNEL_NAME, channelName)
                 .build(CreateChannelWorker.class));
     }
 
-    public LiveData<ChannelEvent> registerChannelEvent() {
-        return ChannelEventLiveData.create(dao);
+    public ChannelLiveEvent registerChannelEvent() {
+        return ChannelLiveEvent.create();
     }
 }
