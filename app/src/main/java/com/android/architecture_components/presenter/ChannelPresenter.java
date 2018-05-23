@@ -9,21 +9,20 @@ import android.text.Editable;
 import com.android.architecture_components.data.ChannelEvent;
 import com.android.architecture_components.data.repository.ChannelRepository;
 import com.android.architecture_components.data.viewmodel.ChannelViewModel;
-import com.android.architecture_components.persistence.dao.ChannelDao;
 import com.android.architecture_components.persistence.entity.Channel;
 import com.android.architecture_components.ui.ChannelRecyclerView;
 import com.sendbird.android.BaseChannel;
 
 import androidx.work.WorkStatus;
 
-public class ChannelPresenter extends BasePresenter<ChannelRecyclerView, ChannelDao, ChannelRepository, ChannelViewModel> {
+public class ChannelPresenter extends BasePresenter<ChannelRecyclerView, ChannelRepository, ChannelViewModel> {
 
-    public ChannelPresenter(LifecycleOwner lifecycleOwner, ChannelRecyclerView view, ChannelDao dao, ChannelRepository repository, ChannelViewModel viewModel) {
-        super(lifecycleOwner, view, dao, repository, viewModel);
+    public ChannelPresenter(LifecycleOwner lifecycleOwner, ChannelRecyclerView view, ChannelRepository repository, ChannelViewModel viewModel) {
+        super(lifecycleOwner, view,  repository, viewModel);
     }
 
     @Override
-    protected void init() {
+    protected void observeLiveData() {
         androidViewModel.getAllLiveData().observe(lifecycleOwner, new Observer<PagedList<Channel>>() {
             @Override
             public void onChanged(@Nullable PagedList<Channel> channels) {
@@ -42,7 +41,7 @@ public class ChannelPresenter extends BasePresenter<ChannelRecyclerView, Channel
     }
 
     @Override
-    protected void registerChannelEvent() {
+    protected void observeLiveEvent() {
         repository.registerChannelEvent().observe(lifecycleOwner, new Observer<ChannelEvent>() {
             @Override
             public void onChanged(@Nullable ChannelEvent channelEvent) {

@@ -6,20 +6,19 @@ import android.support.annotation.Nullable;
 
 import com.android.architecture_components.data.repository.UserRepository;
 import com.android.architecture_components.data.viewmodel.UserViewModel;
-import com.android.architecture_components.persistence.dao.UserDao;
 import com.android.architecture_components.persistence.entity.User;
 import com.android.architecture_components.ui.AuthView;
 
 import androidx.work.WorkStatus;
 
-public class AuthPresenter extends BasePresenter<AuthView, UserDao, UserRepository, UserViewModel> {
+public class AuthPresenter extends BasePresenter<AuthView, UserRepository, UserViewModel> {
 
-    public AuthPresenter(LifecycleOwner lifecycleOwner, AuthView view, UserDao dao, UserRepository repository, UserViewModel viewModel) {
-        super(lifecycleOwner, view, dao, repository, viewModel);
+    public AuthPresenter(LifecycleOwner lifecycleOwner, AuthView view, UserRepository repository, UserViewModel viewModel) {
+        super(lifecycleOwner, view, repository, viewModel);
     }
 
     @Override
-    protected void init() {
+    protected void observeLiveData() {
         androidViewModel.getFirstLiveData().observe(lifecycleOwner, new Observer<User>() {
             @Override
             public void onChanged(@Nullable User user) {
@@ -39,7 +38,7 @@ public class AuthPresenter extends BasePresenter<AuthView, UserDao, UserReposito
     }
 
     @Override
-    protected void registerChannelEvent() {
+    protected void observeLiveEvent() {
 
     }
 }

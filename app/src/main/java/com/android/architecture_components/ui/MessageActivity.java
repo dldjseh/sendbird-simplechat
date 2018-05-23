@@ -43,7 +43,7 @@ public class MessageActivity extends BaseActivity implements MessageRecyclerView
         MessageViewModel.Factory factory = new MessageViewModel.Factory(getApplication(), repository);
         MessageViewModel viewModel = ViewModelProviders.of(this, factory).get(MessageViewModel.class);
 
-        messagePresenter = new MessagePresenter(this, this, dao, repository, viewModel);
+        messagePresenter = new MessagePresenter(this, this, repository, viewModel);
 
         messageAdapter = new MessageAdapter(new MessageItemCallback());
 

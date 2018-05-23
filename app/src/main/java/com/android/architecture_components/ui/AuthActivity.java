@@ -29,7 +29,7 @@ public class AuthActivity extends BaseActivity implements AuthView {
         UserViewModel.Factory factory = new UserViewModel.Factory(getApplication(), repository);
         UserViewModel viewModel = ViewModelProviders.of(this, factory).get(UserViewModel.class);
 
-        authPresenter = new AuthPresenter(this, this, dao, repository, viewModel);
+        authPresenter = new AuthPresenter(this, this, repository, viewModel);
     }
 
     @Override

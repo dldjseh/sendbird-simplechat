@@ -44,7 +44,7 @@ public class ChannelActivity extends BaseActivity implements ChannelRecyclerView
         ChannelViewModel.Factory factory = new ChannelViewModel.Factory(getApplication(), repository);
         ChannelViewModel viewModel = ViewModelProviders.of(this, factory).get(ChannelViewModel.class);
 
-        channelPresenter = new ChannelPresenter(this, this, dao, repository, viewModel);
+        channelPresenter = new ChannelPresenter(this, this, repository, viewModel);
 
         channelAdapter = new ChannelAdapter(new ChannelItemCallback());
 
