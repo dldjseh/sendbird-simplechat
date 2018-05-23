@@ -9,12 +9,14 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.EditText;
 
 import com.android.architecture_components.R;
+import com.android.architecture_components.data.repository.MessageRepository;
+import com.android.architecture_components.data.viewmodel.MessageViewModel;
+import com.android.architecture_components.persistence.ChatDatabase;
+import com.android.architecture_components.persistence.dao.MessageDao;
 import com.android.architecture_components.persistence.entity.Message;
 import com.android.architecture_components.presenter.MessagePresenter;
-import com.android.architecture_components.data.repository.MessageRepository;
 import com.android.architecture_components.ui.adapter.MessageAdapter;
 import com.android.architecture_components.ui.adapter.MessageItemCallback;
-import com.android.architecture_components.data.viewmodel.MessageViewModel;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -35,11 +37,13 @@ public class MessageActivity extends BaseActivity implements MessageRecyclerView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
 
-        MessageRepository repository = new MessageRepository(this);
+        MessageDao dao = ChatDatabase.getInstance(this).getMessageDao();
+        MessageRepository repository = new MessageRepository(dao);
+
         MessageViewModel.Factory factory = new MessageViewModel.Factory(getApplication(), repository);
         MessageViewModel viewModel = ViewModelProviders.of(this, factory).get(MessageViewModel.class);
 
-        messagePresenter = new MessagePresenter(this, this, repository, viewModel);
+        messagePresenter = new MessagePresenter(this, this, dao, repository, viewModel);
 
         messageAdapter = new MessageAdapter(new MessageItemCallback());
 

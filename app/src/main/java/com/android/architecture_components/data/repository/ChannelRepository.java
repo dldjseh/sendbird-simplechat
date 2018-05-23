@@ -3,9 +3,9 @@ package com.android.architecture_components.data.repository;
 import android.arch.lifecycle.LiveData;
 import android.arch.paging.LivePagedListBuilder;
 import android.arch.paging.PagedList;
-import android.content.Context;
 
-import com.android.architecture_components.persistence.ChatDatabase;
+import com.android.architecture_components.data.ChannelEvent;
+import com.android.architecture_components.data.ChannelEventLiveData;
 import com.android.architecture_components.persistence.dao.ChannelDao;
 import com.android.architecture_components.persistence.entity.Channel;
 import com.android.architecture_components.worker.CreateChannelWorker;
@@ -15,8 +15,8 @@ import androidx.work.WorkStatus;
 
 public class ChannelRepository extends BaseRepository<Channel, ChannelDao> {
 
-    public ChannelRepository(Context context) {
-        super(ChatDatabase.getInstance(context).getChannelDao());
+    public ChannelRepository(ChannelDao dao) {
+        super(dao);
     }
 
     @Override
@@ -44,5 +44,9 @@ public class ChannelRepository extends BaseRepository<Channel, ChannelDao> {
         return enqueue(new CreateChannelWorker.Builder<CreateChannelWorker>()
                 .putData(CreateChannelWorker.CHANNEL_NAME, channelName)
                 .build(CreateChannelWorker.class));
+    }
+
+    public LiveData<ChannelEvent> registerChannelEvent() {
+        return ChannelEventLiveData.create(dao);
     }
 }

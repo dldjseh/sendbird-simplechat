@@ -10,12 +10,14 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.EditText;
 
 import com.android.architecture_components.R;
+import com.android.architecture_components.data.repository.ChannelRepository;
+import com.android.architecture_components.data.viewmodel.ChannelViewModel;
+import com.android.architecture_components.persistence.ChatDatabase;
+import com.android.architecture_components.persistence.dao.ChannelDao;
 import com.android.architecture_components.persistence.entity.Channel;
 import com.android.architecture_components.presenter.ChannelPresenter;
-import com.android.architecture_components.data.repository.ChannelRepository;
 import com.android.architecture_components.ui.adapter.ChannelAdapter;
 import com.android.architecture_components.ui.adapter.ChannelItemCallback;
-import com.android.architecture_components.data.viewmodel.ChannelViewModel;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -36,11 +38,13 @@ public class ChannelActivity extends BaseActivity implements ChannelRecyclerView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_channel);
 
-        ChannelRepository repository = new ChannelRepository(this);
+        ChannelDao dao = ChatDatabase.getInstance(this).getChannelDao();
+        ChannelRepository repository = new ChannelRepository(dao);
+
         ChannelViewModel.Factory factory = new ChannelViewModel.Factory(getApplication(), repository);
         ChannelViewModel viewModel = ViewModelProviders.of(this, factory).get(ChannelViewModel.class);
 
-        channelPresenter = new ChannelPresenter(this, this, repository, viewModel);
+        channelPresenter = new ChannelPresenter(this, this, dao, repository, viewModel);
 
         channelAdapter = new ChannelAdapter(new ChannelItemCallback());
 

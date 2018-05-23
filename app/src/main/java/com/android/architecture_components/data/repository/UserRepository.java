@@ -2,9 +2,7 @@ package com.android.architecture_components.data.repository;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.paging.PagedList;
-import android.content.Context;
 
-import com.android.architecture_components.persistence.ChatDatabase;
 import com.android.architecture_components.persistence.dao.UserDao;
 import com.android.architecture_components.persistence.entity.User;
 import com.android.architecture_components.worker.ConnectWorker;
@@ -14,8 +12,8 @@ import androidx.work.WorkStatus;
 
 public class UserRepository extends BaseRepository<User, UserDao> {
 
-    public UserRepository(Context context) {
-        super(ChatDatabase.getInstance(context).getUserDao());
+    public UserRepository(UserDao dao) {
+        super(dao);
     }
 
     @Override

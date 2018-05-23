@@ -21,4 +21,7 @@ public interface ChannelDao extends com.android.architecture_components.persiste
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void save(List<Channel> channels);
+
+    @Query("DELETE FROM channel WHERE id=:id")
+    void delete(String id);
 }
