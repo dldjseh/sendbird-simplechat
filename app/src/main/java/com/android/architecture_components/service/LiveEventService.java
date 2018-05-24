@@ -13,9 +13,6 @@ import android.support.annotation.Nullable;
 
 import com.android.architecture_components.event.ChannelEvent;
 import com.android.architecture_components.event.ChannelLiveEvent;
-import com.android.architecture_components.repository.ChannelListRepository;
-import com.android.architecture_components.persistence.ChatDatabase;
-import com.android.architecture_components.persistence.dao.ChannelDao;
 import com.sendbird.android.BaseChannel;
 
 public class LiveEventService extends Service implements LifecycleOwner {
@@ -34,10 +31,7 @@ public class LiveEventService extends Service implements LifecycleOwner {
         startForeground(1, new Notification());
         lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_START);
 
-        final ChannelDao channelDao = ChatDatabase.getInstance(this).getChannelDao();
-        final ChannelListRepository channelRepository = new ChannelListRepository(channelDao);
-
-        ChannelLiveEvent channelLiveEvent = channelRepository.getLiveEvent();
+        ChannelLiveEvent channelLiveEvent = ChannelLiveEvent.create();
 
         channelLiveEvent.observe(this, new Observer<ChannelEvent>() {
             @Override

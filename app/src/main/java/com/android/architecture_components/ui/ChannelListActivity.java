@@ -15,7 +15,7 @@ import com.android.architecture_components.viewmodel.ChannelListViewModel;
 import com.android.architecture_components.persistence.ChatDatabase;
 import com.android.architecture_components.persistence.dao.ChannelDao;
 import com.android.architecture_components.persistence.entity.Channel;
-import com.android.architecture_components.presenter.ChannelPresenter;
+import com.android.architecture_components.presenter.ChannelListPresenter;
 import com.android.architecture_components.ui.adapter.ChannelAdapter;
 import com.android.architecture_components.ui.adapter.ChannelItemCallback;
 
@@ -29,7 +29,7 @@ public class ChannelListActivity extends BaseActivity implements ChannelRecycler
     @BindView(R.id.activity_channel_list_edit_text)
     EditText editText;
 
-    private ChannelPresenter channelPresenter;
+    private ChannelListPresenter channelPresenter;
 
     private ChannelAdapter channelAdapter;
 
@@ -44,7 +44,7 @@ public class ChannelListActivity extends BaseActivity implements ChannelRecycler
         ChannelListViewModel.Factory factory = new ChannelListViewModel.Factory(getApplication(), repository);
         ChannelListViewModel viewModel = ViewModelProviders.of(this, factory).get(ChannelListViewModel.class);
 
-        channelPresenter = new ChannelPresenter(this, this, repository, viewModel);
+        channelPresenter = new ChannelListPresenter(this, this, repository, viewModel);
 
         channelAdapter = new ChannelAdapter(new ChannelItemCallback());
 

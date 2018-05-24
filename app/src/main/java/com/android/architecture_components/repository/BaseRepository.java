@@ -2,7 +2,6 @@ package com.android.architecture_components.repository;
 
 import android.arch.lifecycle.LiveData;
 
-import com.android.architecture_components.event.LiveEvent;
 import com.android.architecture_components.api.SendBirdApi;
 import com.android.architecture_components.persistence.dao.Dao;
 import com.android.architecture_components.persistence.entity.SendBirdObject;
@@ -13,7 +12,7 @@ import java.util.UUID;
 import androidx.work.WorkRequest;
 import androidx.work.WorkStatus;
 
-public abstract class BaseRepository<OBJ extends SendBirdObject, DAO extends Dao, LE extends LiveEvent>
+public abstract class BaseRepository<OBJ extends SendBirdObject, DAO extends Dao>
         implements SendBirdApi<OBJ> {
 
     protected DAO dao;
@@ -21,8 +20,6 @@ public abstract class BaseRepository<OBJ extends SendBirdObject, DAO extends Dao
     BaseRepository(DAO dao) {
         this.dao = dao;
     }
-
-    public abstract LE getLiveEvent();
 
     final LiveData<WorkStatus> enqueue(WorkRequest request) {
         SendBirdWorkManager.getInstance().enqueue(request);

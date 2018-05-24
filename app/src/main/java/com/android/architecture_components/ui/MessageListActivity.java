@@ -14,7 +14,7 @@ import com.android.architecture_components.viewmodel.MessageListViewModel;
 import com.android.architecture_components.persistence.ChatDatabase;
 import com.android.architecture_components.persistence.dao.MessageDao;
 import com.android.architecture_components.persistence.entity.Message;
-import com.android.architecture_components.presenter.MessagePresenter;
+import com.android.architecture_components.presenter.MessageListPresenter;
 import com.android.architecture_components.ui.adapter.MessageAdapter;
 import com.android.architecture_components.ui.adapter.MessageItemCallback;
 
@@ -23,7 +23,7 @@ import butterknife.OnClick;
 
 public class MessageListActivity extends BaseActivity implements MessageRecyclerView {
 
-    private MessagePresenter messagePresenter;
+    private MessageListPresenter messagePresenter;
 
     private MessageAdapter messageAdapter;
 
@@ -43,7 +43,7 @@ public class MessageListActivity extends BaseActivity implements MessageRecycler
         MessageListViewModel.Factory factory = new MessageListViewModel.Factory(getApplication(), repository);
         MessageListViewModel viewModel = ViewModelProviders.of(this, factory).get(MessageListViewModel.class);
 
-        messagePresenter = new MessagePresenter(this, this, repository, viewModel);
+        messagePresenter = new MessageListPresenter(this, this, repository, viewModel);
 
         messageAdapter = new MessageAdapter(new MessageItemCallback());
 
