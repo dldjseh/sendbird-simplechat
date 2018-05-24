@@ -6,15 +6,20 @@ import com.sendbird.android.BaseChannel;
 import com.sendbird.android.BaseMessage;
 import com.sendbird.android.SendBird;
 
-public class ChannelLiveEvent extends LiveEvent<ChannelEvent> {
+public class ChannelLiveEvent extends MutableLiveData<ChannelEvent> {
 
     private final String TAG = getClass().getSimpleName();
 
+    private final MutableLiveData<BaseMessage> messageReceivedLiveEvent = new MutableLiveData<>();
     private final MutableLiveData<BaseChannel> channelChangedLiveEvent = new MutableLiveData<>();
     private final MutableLiveData<String> channelDeletedLiveEvent = new MutableLiveData<>();
 
     private ChannelLiveEvent() {
 
+    }
+
+    public MutableLiveData<BaseMessage> getMessageReceivedLiveEvent() {
+        return messageReceivedLiveEvent;
     }
 
     public MutableLiveData<BaseChannel> getChannelChangedLiveEvent() {
@@ -30,7 +35,8 @@ public class ChannelLiveEvent extends LiveEvent<ChannelEvent> {
         SendBird.addChannelHandler(TAG, new SendBird.ChannelHandler() {
             @Override
             public void onMessageReceived(BaseChannel baseChannel, BaseMessage baseMessage) {
-
+                messageReceivedLiveEvent.setValue(baseMessage);
+                setValue(ChannelEvent.MESSAGE_RECEIVED);
             }
 
             @Override

@@ -4,6 +4,7 @@ import android.arch.persistence.room.Entity;
 import android.support.annotation.NonNull;
 
 import com.google.common.collect.Lists;
+import com.sendbird.android.BaseChannel;
 import com.sendbird.android.OpenChannel;
 
 import java.util.List;
@@ -28,6 +29,10 @@ public class Channel extends SendBirdObject {
 
     public static Channel create(OpenChannel openChannel) {
         return new Channel(openChannel.getUrl(), openChannel.getName());
+    }
+
+    public static Channel create(BaseChannel baseChannel) {
+        return create((OpenChannel) baseChannel);
     }
 
     public static List<Channel> create(List<OpenChannel> openChannels) {

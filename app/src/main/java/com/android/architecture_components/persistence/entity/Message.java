@@ -50,10 +50,14 @@ public class Message extends SendBirdObject {
                 userMessage.getMessage());
     }
 
+    public static Message create(BaseMessage baseMessage) {
+        return create((UserMessage) baseMessage);
+    }
+
     public static List<Message> create(List<BaseMessage> baseMessages) {
         List<Message> result = Lists.newArrayList();
         for (BaseMessage baseMessage : baseMessages) {
-            result.add(create((UserMessage) baseMessage));
+            result.add(create(baseMessage));
         }
         return result;
     }

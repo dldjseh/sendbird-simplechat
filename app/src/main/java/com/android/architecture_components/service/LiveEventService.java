@@ -13,7 +13,13 @@ import android.support.annotation.Nullable;
 
 import com.android.architecture_components.event.ChannelEvent;
 import com.android.architecture_components.event.ChannelLiveEvent;
+import com.android.architecture_components.persistence.ChatDatabase;
+import com.android.architecture_components.persistence.dao.ChannelDao;
+import com.android.architecture_components.persistence.dao.MessageDao;
+import com.android.architecture_components.persistence.entity.Channel;
+import com.android.architecture_components.persistence.entity.Message;
 import com.sendbird.android.BaseChannel;
+import com.sendbird.android.BaseMessage;
 
 public class LiveEventService extends Service implements LifecycleOwner {
 
@@ -31,6 +37,9 @@ public class LiveEventService extends Service implements LifecycleOwner {
         startForeground(1, new Notification());
         lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_START);
 
+        final ChannelDao channelDao = ChatDatabase.getInstance(this).getChannelDao();
+        final MessageDao messageDao = ChatDatabase.getInstance(this).getMessageDao();
+
         ChannelLiveEvent channelLiveEvent = ChannelLiveEvent.create();
 
         channelLiveEvent.observe(this, new Observer<ChannelEvent>() {
@@ -40,11 +49,19 @@ public class LiveEventService extends Service implements LifecycleOwner {
             }
         });
 
+        channelLiveEvent.getMessageReceivedLiveEvent()
+                .observe(this, new Observer<BaseMessage>() {
+                    @Override
+                    public void onChanged(@Nullable BaseMessage baseMessage) {
+                        messageDao.save(Message.create(baseMessage));
+                    }
+                });
+
         channelLiveEvent.getChannelChangedLiveEvent()
                 .observe(this, new Observer<BaseChannel>() {
                     @Override
                     public void onChanged(@Nullable BaseChannel baseChannel) {
-
+                        channelDao.save(Channel.create(baseChannel));
                     }
                 });
 
@@ -52,7 +69,7 @@ public class LiveEventService extends Service implements LifecycleOwner {
                 .observe(this, new Observer<String>() {
                     @Override
                     public void onChanged(@Nullable String channelId) {
-
+                        channelDao.delete(channelId);
                     }
                 });
     }
