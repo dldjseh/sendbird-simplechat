@@ -1,7 +1,10 @@
 package com.android.architecture_components;
 
 import android.app.Application;
+import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 
+import com.android.architecture_components.service.LiveEventService;
 import com.sendbird.android.SendBird;
 
 public class App extends Application {
@@ -10,5 +13,8 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         SendBird.init(getString(R.string.send_bird_app_id), this);
+
+        Intent intent = new Intent(this, LiveEventService.class);
+        ContextCompat.startForegroundService(this, intent);
     }
 }

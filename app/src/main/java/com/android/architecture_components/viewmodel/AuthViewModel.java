@@ -1,4 +1,4 @@
-package com.android.architecture_components.data.viewmodel;
+package com.android.architecture_components.viewmodel;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
@@ -7,14 +7,14 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.arch.paging.PagedList;
 import android.support.annotation.NonNull;
 
-import com.android.architecture_components.data.repository.UserRepository;
+import com.android.architecture_components.repository.AuthRepository;
 import com.android.architecture_components.persistence.entity.User;
 
-public class UserViewModel extends BaseViewModel<User, UserRepository> {
+public class AuthViewModel extends BaseViewModel<User, AuthRepository> {
 
     private LiveData<User> user;
 
-    private UserViewModel(@NonNull Application application, @NonNull UserRepository userRepository) {
+    private AuthViewModel(@NonNull Application application, @NonNull AuthRepository userRepository) {
         super(application, userRepository);
     }
 
@@ -37,9 +37,9 @@ public class UserViewModel extends BaseViewModel<User, UserRepository> {
         private Application application;
 
         @NonNull
-        private UserRepository repository;
+        private AuthRepository repository;
 
-        public Factory(@NonNull Application application, @NonNull UserRepository repository) {
+        public Factory(@NonNull Application application, @NonNull AuthRepository repository) {
             this.application = application;
             this.repository = repository;
         }
@@ -47,7 +47,7 @@ public class UserViewModel extends BaseViewModel<User, UserRepository> {
         @NonNull
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-            return (T) new UserViewModel(application, repository);
+            return (T) new AuthViewModel(application, repository);
         }
     }
 }

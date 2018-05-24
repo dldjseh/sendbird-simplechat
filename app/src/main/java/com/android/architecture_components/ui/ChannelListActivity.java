@@ -10,8 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.EditText;
 
 import com.android.architecture_components.R;
-import com.android.architecture_components.data.repository.ChannelRepository;
-import com.android.architecture_components.data.viewmodel.ChannelViewModel;
+import com.android.architecture_components.repository.ChannelListRepository;
+import com.android.architecture_components.viewmodel.ChannelListViewModel;
 import com.android.architecture_components.persistence.ChatDatabase;
 import com.android.architecture_components.persistence.dao.ChannelDao;
 import com.android.architecture_components.persistence.entity.Channel;
@@ -22,11 +22,11 @@ import com.android.architecture_components.ui.adapter.ChannelItemCallback;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class ChannelActivity extends BaseActivity implements ChannelRecyclerView {
+public class ChannelListActivity extends BaseActivity implements ChannelRecyclerView {
 
-    @BindView(R.id.activity_channel_recycler_view)
+    @BindView(R.id.activity_channel_list_recycler_view)
     RecyclerView recyclerView;
-    @BindView(R.id.activity_channel_edit_text)
+    @BindView(R.id.activity_channel_list_edit_text)
     EditText editText;
 
     private ChannelPresenter channelPresenter;
@@ -36,13 +36,13 @@ public class ChannelActivity extends BaseActivity implements ChannelRecyclerView
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_channel);
+        setContentView(R.layout.activity_channel_list);
 
         ChannelDao dao = ChatDatabase.getInstance(this).getChannelDao();
-        ChannelRepository repository = new ChannelRepository(dao);
+        ChannelListRepository repository = new ChannelListRepository(dao);
 
-        ChannelViewModel.Factory factory = new ChannelViewModel.Factory(getApplication(), repository);
-        ChannelViewModel viewModel = ViewModelProviders.of(this, factory).get(ChannelViewModel.class);
+        ChannelListViewModel.Factory factory = new ChannelListViewModel.Factory(getApplication(), repository);
+        ChannelListViewModel viewModel = ViewModelProviders.of(this, factory).get(ChannelListViewModel.class);
 
         channelPresenter = new ChannelPresenter(this, this, repository, viewModel);
 
@@ -62,7 +62,7 @@ public class ChannelActivity extends BaseActivity implements ChannelRecyclerView
         channelAdapter.submitList(list);
     }
 
-    @OnClick(R.id.activity_channel_create_button)
+    @OnClick(R.id.activity_channel_list_create_button)
     protected void onCreateChannelClicked() {
         channelPresenter.onCreateChannelClicked(editText.getText());
     }

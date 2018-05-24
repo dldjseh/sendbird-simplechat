@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.android.architecture_components.R;
 import com.android.architecture_components.persistence.entity.Message;
 
 import butterknife.BindView;
@@ -22,7 +21,7 @@ public class MessageAdapter extends PagedListAdapter<Message, MessageAdapter.Mes
     @NonNull
     @Override
     public MessageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_holder_message, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(android.R.layout.simple_list_item_1, parent, false);
         return new MessageViewHolder(view);
     }
 
@@ -39,7 +38,7 @@ public class MessageAdapter extends PagedListAdapter<Message, MessageAdapter.Mes
 
     class MessageViewHolder extends ViewHolder {
 
-        @BindView(R.id.view_holder_message_text)
+        @BindView(android.R.id.text1)
         TextView text;
 
         MessageViewHolder(View itemView) {

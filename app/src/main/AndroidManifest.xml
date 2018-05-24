@@ -24,9 +24,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.ChannelActivity" />
+        <activity android:name=".ui.ChannelListActivity" />
 
-        <activity android:name=".ui.MessageActivity" />
+        <activity android:name=".ui.MessageListActivity" />
+
+        <service android:name=".service.LiveEventService"/>
 
     </application>
 

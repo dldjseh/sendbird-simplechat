@@ -3,14 +3,12 @@ package com.android.architecture_components.ui;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.widget.Toast;
 
 import com.android.architecture_components.R;
-import com.android.architecture_components.data.repository.UserRepository;
-import com.android.architecture_components.data.viewmodel.UserViewModel;
+import com.android.architecture_components.repository.AuthRepository;
+import com.android.architecture_components.viewmodel.AuthViewModel;
 import com.android.architecture_components.persistence.ChatDatabase;
 import com.android.architecture_components.persistence.dao.UserDao;
-import com.android.architecture_components.persistence.entity.User;
 import com.android.architecture_components.presenter.AuthPresenter;
 import com.android.architecture_components.ui.intent.ChannelIntent;
 
@@ -24,17 +22,16 @@ public class AuthActivity extends BaseActivity implements AuthView {
         setContentView(R.layout.activity_auth);
 
         UserDao dao = ChatDatabase.getInstance(this).getUserDao();
-        UserRepository repository = new UserRepository(dao);
+        AuthRepository repository = new AuthRepository(dao);
 
-        UserViewModel.Factory factory = new UserViewModel.Factory(getApplication(), repository);
-        UserViewModel viewModel = ViewModelProviders.of(this, factory).get(UserViewModel.class);
+        AuthViewModel.Factory factory = new AuthViewModel.Factory(getApplication(), repository);
+        AuthViewModel viewModel = ViewModelProviders.of(this, factory).get(AuthViewModel.class);
 
         authPresenter = new AuthPresenter(this, this, repository, viewModel);
     }
 
     @Override
-    public void submitUser(User user) {
-        Toast.makeText(this, "Hello " + user.getId(), Toast.LENGTH_SHORT).show();
+    public void connect() {
         ChannelIntent intent = new ChannelIntent(this);
         startActivityForResult(intent, intent.getRequestCode());
         finish();

@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.ChannelActivity">
+    tools:context=".ui.MessageListActivity">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/activity_channel_recycler_view"
+        android:id="@+id/activity_message_list_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
@@ -19,16 +19,16 @@
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/activity_channel_edit_text"
+            android:id="@+id/activity_message_list_edit_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
         <Button
-            android:id="@+id/activity_channel_create_button"
+            android:id="@+id/activity_message_list_send_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="create" />
+            android:text="send" />
 
     </LinearLayout>
 

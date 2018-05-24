@@ -1,9 +1,9 @@
-package com.android.architecture_components.data.repository;
+package com.android.architecture_components.repository;
 
 import android.arch.lifecycle.LiveData;
 
-import com.android.architecture_components.data.SendBirdApi;
-import com.android.architecture_components.data.event.LiveEvent;
+import com.android.architecture_components.event.LiveEvent;
+import com.android.architecture_components.api.SendBirdApi;
 import com.android.architecture_components.persistence.dao.Dao;
 import com.android.architecture_components.persistence.entity.SendBirdObject;
 import com.android.architecture_components.worker.SendBirdWorkManager;

@@ -1,4 +1,4 @@
-package com.android.architecture_components.data.event;
+package com.android.architecture_components.event;
 
 public class UserLiveEvent extends LiveEvent<UserEvent> {
 

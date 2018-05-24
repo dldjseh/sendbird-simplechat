@@ -1,4 +1,4 @@
-package com.android.architecture_components.data;
+package com.android.architecture_components.api;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.paging.PagedList;

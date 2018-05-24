@@ -1,16 +1,16 @@
-package com.android.architecture_components.data.repository;
+package com.android.architecture_components.repository;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.paging.LivePagedListBuilder;
 import android.arch.paging.PagedList;
 
-import com.android.architecture_components.data.event.MessageLiveEvent;
+import com.android.architecture_components.event.MessageLiveEvent;
 import com.android.architecture_components.persistence.dao.MessageDao;
 import com.android.architecture_components.persistence.entity.Message;
 
-public class MessageRepository extends BaseRepository<Message, MessageDao, MessageLiveEvent> {
+public class MessageListRepository extends BaseRepository<Message, MessageDao, MessageLiveEvent> {
 
-    public MessageRepository(MessageDao dao) {
+    public MessageListRepository(MessageDao dao) {
         super(dao);
     }
 

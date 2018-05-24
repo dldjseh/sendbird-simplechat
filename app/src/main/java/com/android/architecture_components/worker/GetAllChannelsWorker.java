@@ -10,7 +10,7 @@ import com.sendbird.android.SendBirdException;
 
 import java.util.List;
 
-public class GetAndJoinAllChannelsWorker extends BaseWorker<List<OpenChannel>> {
+public class GetAllChannelsWorker extends BaseWorker<List<OpenChannel>> {
 
     @NonNull
     @Override
@@ -29,9 +29,5 @@ public class GetAndJoinAllChannelsWorker extends BaseWorker<List<OpenChannel>> {
         ChatDatabase.getInstance(getApplicationContext())
                 .getChannelDao()
                 .save(Channel.create(openChannels));
-
-        for (OpenChannel openChannel : openChannels) {
-            openChannel.enter(null);
-        }
     }
 }

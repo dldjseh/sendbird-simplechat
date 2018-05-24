@@ -1,4 +1,4 @@
-package com.android.architecture_components.data.viewmodel;
+package com.android.architecture_components.viewmodel;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
@@ -7,14 +7,14 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.arch.paging.PagedList;
 import android.support.annotation.NonNull;
 
-import com.android.architecture_components.data.repository.MessageRepository;
+import com.android.architecture_components.repository.MessageListRepository;
 import com.android.architecture_components.persistence.entity.Message;
 
-public class MessageViewModel extends BaseViewModel<Message, MessageRepository> {
+public class MessageListViewModel extends BaseViewModel<Message, MessageListRepository> {
 
     private LiveData<PagedList<Message>> messages;
 
-    private MessageViewModel(@NonNull Application application, @NonNull MessageRepository messageRepository) {
+    private MessageListViewModel(@NonNull Application application, @NonNull MessageListRepository messageRepository) {
         super(application, messageRepository);
     }
 
@@ -41,9 +41,9 @@ public class MessageViewModel extends BaseViewModel<Message, MessageRepository> 
         private Application application;
 
         @NonNull
-        private MessageRepository repository;
+        private MessageListRepository repository;
 
-        public Factory(@NonNull Application application, @NonNull MessageRepository repository) {
+        public Factory(@NonNull Application application, @NonNull MessageListRepository repository) {
             this.application = application;
             this.repository = repository;
         }
@@ -51,7 +51,7 @@ public class MessageViewModel extends BaseViewModel<Message, MessageRepository> 
         @NonNull
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-            return (T) new MessageViewModel(application, repository);
+            return (T) new MessageListViewModel(application, repository);
         }
     }
 }

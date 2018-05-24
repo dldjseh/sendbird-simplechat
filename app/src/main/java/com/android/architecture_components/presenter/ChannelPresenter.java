@@ -6,16 +6,16 @@ import android.arch.paging.PagedList;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 
-import com.android.architecture_components.data.repository.ChannelRepository;
-import com.android.architecture_components.data.viewmodel.ChannelViewModel;
+import com.android.architecture_components.repository.ChannelListRepository;
+import com.android.architecture_components.viewmodel.ChannelListViewModel;
 import com.android.architecture_components.persistence.entity.Channel;
 import com.android.architecture_components.ui.ChannelRecyclerView;
 
 import androidx.work.WorkStatus;
 
-public class ChannelPresenter extends BasePresenter<ChannelRecyclerView, ChannelRepository, ChannelViewModel> {
+public class ChannelPresenter extends BasePresenter<ChannelRecyclerView, ChannelListRepository, ChannelListViewModel> {
 
-    public ChannelPresenter(LifecycleOwner lifecycleOwner, ChannelRecyclerView view, ChannelRepository repository, ChannelViewModel viewModel) {
+    public ChannelPresenter(LifecycleOwner lifecycleOwner, ChannelRecyclerView view, ChannelListRepository repository, ChannelListViewModel viewModel) {
         super(lifecycleOwner, view, repository, viewModel);
     }
 

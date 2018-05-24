@@ -1,4 +1,4 @@
-package com.android.architecture_components.data.viewmodel;
+package com.android.architecture_components.viewmodel;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
@@ -7,14 +7,14 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.arch.paging.PagedList;
 import android.support.annotation.NonNull;
 
-import com.android.architecture_components.data.repository.ChannelRepository;
+import com.android.architecture_components.repository.ChannelListRepository;
 import com.android.architecture_components.persistence.entity.Channel;
 
-public class ChannelViewModel extends BaseViewModel<Channel, ChannelRepository> {
+public class ChannelListViewModel extends BaseViewModel<Channel, ChannelListRepository> {
 
     private LiveData<PagedList<Channel>> channels;
 
-    private ChannelViewModel(@NonNull Application application, @NonNull ChannelRepository channelRepository) {
+    private ChannelListViewModel(@NonNull Application application, @NonNull ChannelListRepository channelRepository) {
         super(application, channelRepository);
     }
 
@@ -37,9 +37,9 @@ public class ChannelViewModel extends BaseViewModel<Channel, ChannelRepository> 
         private Application application;
 
         @NonNull
-        private ChannelRepository repository;
+        private ChannelListRepository repository;
 
-        public Factory(@NonNull Application application, @NonNull ChannelRepository repository) {
+        public Factory(@NonNull Application application, @NonNull ChannelListRepository repository) {
             this.application = application;
             this.repository = repository;
         }
@@ -47,7 +47,7 @@ public class ChannelViewModel extends BaseViewModel<Channel, ChannelRepository> 
         @NonNull
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-            return (T) new ChannelViewModel(application, repository);
+            return (T) new ChannelListViewModel(application, repository);
         }
     }
 }

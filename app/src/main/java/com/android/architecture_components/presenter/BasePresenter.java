@@ -3,7 +3,7 @@ package com.android.architecture_components.presenter;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LifecycleOwner;
 
-import com.android.architecture_components.data.repository.BaseRepository;
+import com.android.architecture_components.repository.BaseRepository;
 import com.android.architecture_components.ui.BaseView;
 
 public abstract class BasePresenter<V extends BaseView, REPO extends BaseRepository, AVM extends AndroidViewModel> {

@@ -9,8 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.EditText;
 
 import com.android.architecture_components.R;
-import com.android.architecture_components.data.repository.MessageRepository;
-import com.android.architecture_components.data.viewmodel.MessageViewModel;
+import com.android.architecture_components.repository.MessageListRepository;
+import com.android.architecture_components.viewmodel.MessageListViewModel;
 import com.android.architecture_components.persistence.ChatDatabase;
 import com.android.architecture_components.persistence.dao.MessageDao;
 import com.android.architecture_components.persistence.entity.Message;
@@ -21,27 +21,27 @@ import com.android.architecture_components.ui.adapter.MessageItemCallback;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class MessageActivity extends BaseActivity implements MessageRecyclerView {
+public class MessageListActivity extends BaseActivity implements MessageRecyclerView {
 
     private MessagePresenter messagePresenter;
 
     private MessageAdapter messageAdapter;
 
-    @BindView(R.id.activity_message_recycler_view)
+    @BindView(R.id.activity_message_list_recycler_view)
     RecyclerView recyclerView;
-    @BindView(R.id.activity_message_edit_text)
+    @BindView(R.id.activity_message_list_edit_text)
     EditText editText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_message);
+        setContentView(R.layout.activity_message_list);
 
         MessageDao dao = ChatDatabase.getInstance(this).getMessageDao();
-        MessageRepository repository = new MessageRepository(dao);
+        MessageListRepository repository = new MessageListRepository(dao);
 
-        MessageViewModel.Factory factory = new MessageViewModel.Factory(getApplication(), repository);
-        MessageViewModel viewModel = ViewModelProviders.of(this, factory).get(MessageViewModel.class);
+        MessageListViewModel.Factory factory = new MessageListViewModel.Factory(getApplication(), repository);
+        MessageListViewModel viewModel = ViewModelProviders.of(this, factory).get(MessageListViewModel.class);
 
         messagePresenter = new MessagePresenter(this, this, repository, viewModel);
 
@@ -58,7 +58,7 @@ public class MessageActivity extends BaseActivity implements MessageRecyclerView
         messageAdapter.submitList(list);
     }
 
-    @OnClick(R.id.activity_message_send_button)
+    @OnClick(R.id.activity_message_list_send_button)
     protected void onSendClicked() {
         messagePresenter.onSendClicked(editText.getText());
     }

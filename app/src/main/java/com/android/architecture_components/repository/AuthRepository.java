@@ -1,9 +1,9 @@
-package com.android.architecture_components.data.repository;
+package com.android.architecture_components.repository;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.paging.PagedList;
 
-import com.android.architecture_components.data.event.UserLiveEvent;
+import com.android.architecture_components.event.UserLiveEvent;
 import com.android.architecture_components.persistence.dao.UserDao;
 import com.android.architecture_components.persistence.entity.User;
 import com.android.architecture_components.worker.ConnectWorker;
@@ -11,9 +11,9 @@ import com.android.architecture_components.worker.DisconnectWorker;
 
 import androidx.work.WorkStatus;
 
-public class UserRepository extends BaseRepository<User, UserDao, UserLiveEvent> {
+public class AuthRepository extends BaseRepository<User, UserDao, UserLiveEvent> {
 
-    public UserRepository(UserDao dao) {
+    public AuthRepository(UserDao dao) {
         super(dao);
     }
 
