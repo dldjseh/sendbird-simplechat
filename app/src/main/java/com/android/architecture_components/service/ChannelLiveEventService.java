@@ -21,7 +21,7 @@ import com.android.architecture_components.persistence.entity.Message;
 import com.sendbird.android.BaseChannel;
 import com.sendbird.android.BaseMessage;
 
-public class LiveEventService extends Service implements LifecycleOwner {
+public class ChannelLiveEventService extends Service implements LifecycleOwner {
 
     private final LifecycleRegistry lifecycleRegistry = new LifecycleRegistry(this);
 

@@ -28,7 +28,7 @@
 
         <activity android:name=".ui.MessageListActivity" />
 
-        <service android:name=".service.LiveEventService"/>
+        <service android:name=".service.ChannelLiveEventService"/>
 
     </application>
 
