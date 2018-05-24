@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.architecture_components.persistence.entity.Channel;
-import com.android.architecture_components.ui.intent.MessageIntent;
+import com.android.architecture_components.ui.intent.MessageListIntent;
 
 import butterknife.BindView;
 
@@ -47,7 +47,7 @@ public class ChannelAdapter extends PagedListAdapter<Channel, ChannelAdapter.Cha
         holder.text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                context.startActivity(new MessageIntent(context, channelId));
+                context.startActivity(new MessageListIntent(context, channelId));
             }
         });
     }

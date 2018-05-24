@@ -5,8 +5,8 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.support.annotation.NonNull;
 
 import com.android.architecture_components.api.SendBirdApi;
-import com.android.architecture_components.repository.BaseRepository;
 import com.android.architecture_components.persistence.entity.SendBirdObject;
+import com.android.architecture_components.repository.BaseRepository;
 
 public abstract class BaseViewModel<OBJ extends SendBirdObject, REPO extends BaseRepository>
         extends AndroidViewModel implements SendBirdApi<OBJ> {

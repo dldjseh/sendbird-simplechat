@@ -4,9 +4,9 @@ import android.content.Context;
 
 import com.android.architecture_components.ui.ChannelListActivity;
 
-public class ChannelIntent extends BaseIntent {
+public class ChannelListIntent extends BaseIntent {
 
-    public ChannelIntent(Context context) {
+    public ChannelListIntent(Context context) {
         super(context, ChannelListActivity.class);
     }
 }

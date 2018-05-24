@@ -9,14 +9,14 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.EditText;
 
 import com.android.architecture_components.R;
-import com.android.architecture_components.repository.MessageListRepository;
-import com.android.architecture_components.viewmodel.MessageListViewModel;
 import com.android.architecture_components.persistence.ChatDatabase;
 import com.android.architecture_components.persistence.dao.MessageDao;
 import com.android.architecture_components.persistence.entity.Message;
 import com.android.architecture_components.presenter.MessageListPresenter;
+import com.android.architecture_components.repository.MessageListRepository;
 import com.android.architecture_components.ui.adapter.MessageAdapter;
 import com.android.architecture_components.ui.adapter.MessageItemCallback;
+import com.android.architecture_components.viewmodel.MessageListViewModel;
 
 import butterknife.BindView;
 import butterknife.OnClick;

@@ -5,8 +5,8 @@ import android.arch.lifecycle.Observer;
 import android.support.annotation.Nullable;
 
 import com.android.architecture_components.repository.AuthRepository;
-import com.android.architecture_components.viewmodel.AuthViewModel;
 import com.android.architecture_components.ui.AuthView;
+import com.android.architecture_components.viewmodel.AuthViewModel;
 
 import androidx.work.WorkStatus;
 

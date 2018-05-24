@@ -5,11 +5,11 @@ import android.content.Intent;
 
 import com.android.architecture_components.ui.MessageListActivity;
 
-public class MessageIntent extends BaseIntent {
+public class MessageListIntent extends BaseIntent {
 
     private static final String CHANNEL_ID_EXTRA = "channel_id";
 
-    public MessageIntent(Context context, String channelId) {
+    public MessageListIntent(Context context, String channelId) {
         super(context, MessageListActivity.class);
         putExtra(CHANNEL_ID_EXTRA, channelId);
     }

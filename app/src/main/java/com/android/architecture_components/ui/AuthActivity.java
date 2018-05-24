@@ -5,12 +5,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.android.architecture_components.R;
-import com.android.architecture_components.repository.AuthRepository;
-import com.android.architecture_components.viewmodel.AuthViewModel;
 import com.android.architecture_components.persistence.ChatDatabase;
 import com.android.architecture_components.persistence.dao.UserDao;
 import com.android.architecture_components.presenter.AuthPresenter;
-import com.android.architecture_components.ui.intent.ChannelIntent;
+import com.android.architecture_components.repository.AuthRepository;
+import com.android.architecture_components.ui.intent.ChannelListIntent;
+import com.android.architecture_components.viewmodel.AuthViewModel;
 
 public class AuthActivity extends BaseActivity implements AuthView {
 
@@ -32,7 +32,7 @@ public class AuthActivity extends BaseActivity implements AuthView {
 
     @Override
     public void connect() {
-        ChannelIntent intent = new ChannelIntent(this);
+        ChannelListIntent intent = new ChannelListIntent(this);
         startActivityForResult(intent, intent.getRequestCode());
         finish();
     }

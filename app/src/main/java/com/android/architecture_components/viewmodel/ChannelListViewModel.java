@@ -6,9 +6,10 @@ import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.paging.PagedList;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
-import com.android.architecture_components.repository.ChannelListRepository;
 import com.android.architecture_components.persistence.entity.Channel;
+import com.android.architecture_components.repository.ChannelListRepository;
 
 public class ChannelListViewModel extends BaseViewModel<Channel, ChannelListRepository> {
 
@@ -19,9 +20,9 @@ public class ChannelListViewModel extends BaseViewModel<Channel, ChannelListRepo
     }
 
     @Override
-    public LiveData<PagedList<Channel>> getAllLiveData() {
+    public LiveData<PagedList<Channel>> getAllLiveData(@Nullable String id) {
         if (channels == null) {
-            channels = repository.getAllLiveData();
+            channels = repository.getAllLiveData(id);
         }
         return channels;
     }

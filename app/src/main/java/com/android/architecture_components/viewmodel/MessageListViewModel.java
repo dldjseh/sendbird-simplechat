@@ -6,9 +6,10 @@ import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.paging.PagedList;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
-import com.android.architecture_components.repository.MessageListRepository;
 import com.android.architecture_components.persistence.entity.Message;
+import com.android.architecture_components.repository.MessageListRepository;
 
 public class MessageListViewModel extends BaseViewModel<Message, MessageListRepository> {
 
@@ -19,9 +20,9 @@ public class MessageListViewModel extends BaseViewModel<Message, MessageListRepo
     }
 
     @Override
-    public LiveData<PagedList<Message>> getAllLiveData() {
+    public LiveData<PagedList<Message>> getAllLiveData(@Nullable String id) {
         if (messages == null) {
-            messages = repository.getAllLiveData();
+            messages = repository.getAllLiveData(id);
         }
         return messages;
     }
@@ -29,10 +30,6 @@ public class MessageListViewModel extends BaseViewModel<Message, MessageListRepo
     @Override
     public LiveData<Message> getFirstLiveData() {
         return null;
-    }
-
-    public void save(Message message) {
-
     }
 
     public static class Factory extends ViewModelProvider.NewInstanceFactory {

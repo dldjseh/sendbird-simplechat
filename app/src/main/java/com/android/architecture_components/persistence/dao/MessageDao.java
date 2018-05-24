@@ -8,12 +8,17 @@ import android.arch.persistence.room.Query;
 
 import com.android.architecture_components.persistence.entity.Message;
 
+import java.util.List;
+
 @Dao
 public interface MessageDao extends com.android.architecture_components.persistence.dao.Dao {
 
-    @Query("SELECT * FROM message")
-    DataSource.Factory<Integer, Message> getAll();
+    @Query("SELECT * FROM message WHERE channelId=:channelId")
+    DataSource.Factory<Integer, Message> getAll(String channelId);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void save(Message... messages);
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void save(List<Message> messages);
 }

@@ -3,6 +3,7 @@ package com.android.architecture_components.repository;
 import android.arch.lifecycle.LiveData;
 import android.arch.paging.LivePagedListBuilder;
 import android.arch.paging.PagedList;
+import android.support.annotation.Nullable;
 
 import com.android.architecture_components.persistence.dao.ChannelDao;
 import com.android.architecture_components.persistence.entity.Channel;
@@ -18,7 +19,7 @@ public class ChannelListRepository extends BaseRepository<Channel, ChannelDao> {
     }
 
     @Override
-    public LiveData<PagedList<Channel>> getAllLiveData() {
+    public LiveData<PagedList<Channel>> getAllLiveData(@Nullable String id) {
         PagedList.Config config = new PagedList.Config.Builder()
                 .setInitialLoadSizeHint(10)
                 .setPageSize(10)

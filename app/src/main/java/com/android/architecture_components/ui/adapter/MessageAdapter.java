@@ -32,7 +32,7 @@ public class MessageAdapter extends PagedListAdapter<Message, MessageAdapter.Mes
         if (message == null) {
             holder.text.setText("null");
         } else {
-            holder.text.setText(message.getId());
+            holder.text.setText(message.getMessage());
         }
     }
 

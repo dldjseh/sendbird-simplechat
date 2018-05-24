@@ -21,7 +21,7 @@ public class ChannelListPresenter extends BasePresenter<ChannelRecyclerView, Cha
 
     @Override
     protected void observeLiveData() {
-        androidViewModel.getAllLiveData().observe(lifecycleOwner, new Observer<PagedList<Channel>>() {
+        androidViewModel.getAllLiveData(null).observe(lifecycleOwner, new Observer<PagedList<Channel>>() {
             @Override
             public void onChanged(@Nullable PagedList<Channel> channels) {
                 view.submitList(channels);

@@ -10,14 +10,14 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.EditText;
 
 import com.android.architecture_components.R;
-import com.android.architecture_components.repository.ChannelListRepository;
-import com.android.architecture_components.viewmodel.ChannelListViewModel;
 import com.android.architecture_components.persistence.ChatDatabase;
 import com.android.architecture_components.persistence.dao.ChannelDao;
 import com.android.architecture_components.persistence.entity.Channel;
 import com.android.architecture_components.presenter.ChannelListPresenter;
+import com.android.architecture_components.repository.ChannelListRepository;
 import com.android.architecture_components.ui.adapter.ChannelAdapter;
 import com.android.architecture_components.ui.adapter.ChannelItemCallback;
+import com.android.architecture_components.viewmodel.ChannelListViewModel;
 
 import butterknife.BindView;
 import butterknife.OnClick;

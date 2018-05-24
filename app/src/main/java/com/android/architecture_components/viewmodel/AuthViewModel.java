@@ -6,9 +6,10 @@ import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.paging.PagedList;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
-import com.android.architecture_components.repository.AuthRepository;
 import com.android.architecture_components.persistence.entity.User;
+import com.android.architecture_components.repository.AuthRepository;
 
 public class AuthViewModel extends BaseViewModel<User, AuthRepository> {
 
@@ -19,7 +20,7 @@ public class AuthViewModel extends BaseViewModel<User, AuthRepository> {
     }
 
     @Override
-    public LiveData<PagedList<User>> getAllLiveData() {
+    public LiveData<PagedList<User>> getAllLiveData(@Nullable String id) {
         return null;
     }
 

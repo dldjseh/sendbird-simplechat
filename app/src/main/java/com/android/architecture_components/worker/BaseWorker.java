@@ -95,8 +95,4 @@ public abstract class BaseWorker<RESULT> extends Worker {
     protected void handleResult(RESULT result) {
 
     }
-
-    protected void handleResult() {
-
-    }
 }
