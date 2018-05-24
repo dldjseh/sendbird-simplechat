@@ -11,8 +11,8 @@ import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.android.architecture_components.event.ChannelEvent;
-import com.android.architecture_components.event.ChannelLiveEvent;
+import com.android.architecture_components.data.event.ChannelEvent;
+import com.android.architecture_components.data.event.ChannelLiveEvent;
 import com.android.architecture_components.persistence.ChatDatabase;
 import com.android.architecture_components.persistence.dao.ChannelDao;
 import com.android.architecture_components.persistence.dao.MessageDao;

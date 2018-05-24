@@ -1,4 +1,4 @@
-package com.android.architecture_components.event;
+package com.android.architecture_components.data.event;
 
 import android.arch.lifecycle.MutableLiveData;
 
